@@ -131,9 +131,7 @@ exec_always nm-applet
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-gaps outer 7px
-gaps inner 8px
+    # We just use 1-10 as the default.xx
 # Layout stuff:
 #
     # You can "split" the current object of your focus with

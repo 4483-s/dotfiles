@@ -46,8 +46,8 @@ bindsym $mod+o exec firefox
     # Kill focused window
     bindsym $mod+Shift+q kill
     # Start your launcher
-    bindsym $mod+x exec $menu
-    bindsym $mod+Shift+x exec killall rofi 
+    bindsym $mod+i exec $menu
+    bindsym $mod+Shift+i exec killall rofi 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.

@@ -40,7 +40,7 @@ bindsym $mod+shift+i exec killall rofi
 #
 bindsym $mod+shift+c reload
 bindsym $mod+shift+e exec swaymsg exit
-bindsym $mod+shift+q+i exec systemctl suspend
+bindsym $mod+shift+q+semicolon exec systemctl suspend
 bindsym $mod+shift+q+o exec poweroff
     floating_modifier $mod normal
 #

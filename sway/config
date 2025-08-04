@@ -18,9 +18,10 @@ output * bg ~/.config/sway/wp9104535-gnu-linux-wallpapers.jpg fill
 default_border normal 1
 hide_edge_borders both
   exec swayidle -w \
-           timeout 450 'swaylock -c 444444' \
+           timeout 300 'swaylock -c 000000' \
            timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
            before-sleep 'swaylock -f -c 000000'
+#
 input * {
 tap enabled
 }
@@ -40,7 +41,7 @@ bindsym $mod+shift+i exec killall rofi
 #
 bindsym $mod+shift+c reload
 bindsym $mod+shift+e exec swaymsg exit
-bindsym $mod+shift+q+semicolon exec systemctl suspend
+bindsym $mod+shift+q+semicolon exec 
 bindsym $mod+shift+q+o exec poweroff
     floating_modifier $mod normal
 #

@@ -28,12 +28,16 @@ tap enabled
 #
 # Hotkeys
 bindsym $mod+o exec $brow
-bindsym $mod+n exec $brow https://github.com
 bindsym $mod+comma+period exec $term
 bindsym $mod+return exec $term
 bindsym $mod+q kill
 bindsym $mod+u kill
 bindsym $mod+i exec $menu
+# Utils 
+bindsym $mod+n exec amixer -D default sset Master 5%-
+bindsym $mod+m exec amixer -D default sset Master 5%+
+bindsym $mod+period exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+
 #
 bindsym $mod+shift+c reload
 bindsym $mod+shift+e exec swaymsg exit

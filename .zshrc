@@ -105,7 +105,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias v="nvim"
 alias rm="trash-put"
-alias pshdt="cp -r ~/.config/sway ~/.config/waybar ~/.config/rofi ~/.config/kitty /etc/keyd ~/.zshrc ~/dotfiles;cd ~/dotfiles;git add .;git commit -m 'sync';git push;cd -"
+alias pshdt="cd ~/.config/;cp -r sway waybar rofi kitty /etc/keyd ~/.zshrc ~/dotfiles;cd ~/dotfiles;git add .;git commit -m 'sync';git push;cd -"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh

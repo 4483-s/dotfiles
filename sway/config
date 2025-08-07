@@ -33,9 +33,9 @@ bindsym $mod+return exec $term
 bindsym $mod+q kill
 bindsym $mod+u kill
 bindsym $mod+i exec $menu
-# Utils 
-bindsym $mod+n exec amixer -D default sset Master 5%-
-bindsym $mod+m exec amixer -D default sset Master 5%+
+# Utils pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym $mod+n exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym $mod+m exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
 bindsym $mod+period exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
 
 #

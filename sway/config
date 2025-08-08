@@ -150,7 +150,7 @@ bindsym $mod+r mode "resize"
 #
 # Bar
 bar {
-    position top
     swaybar_command waybar
+    # position bottom
 }
 include /etc/sway/config.d/*

@@ -1222,7 +1222,7 @@
 
 #: The foreground and background colors.
 
-background_opacity 0.6
+background_opacity 0.7
 
 #: The opacity of the background. A number between zero and one, where
 #: one is opaque and zero is fully transparent. This will only work if
@@ -2662,6 +2662,6 @@ background_opacity 0.6
 
 
 # BEGIN_KITTY_THEME
-# Atom
+# 1984 Dark
 include current-theme.conf
 # END_KITTY_THEME

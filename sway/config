@@ -27,11 +27,12 @@ tap enabled
 }
 # Hotkeys
 bindsym $mod+o exec $brow
-bindsym $mod+comma+period exec $term
-bindsym $mod+return exec $term
+bindsym $mod+return exec $menu
 bindsym $mod+q kill
 bindsym $mod+u kill
-bindsym $mod+i exec $menu
+bindsym $mod+i exec $term
+bindsym $mod+shift+f12 exec rofi -show drun -run-command "$HOME/.config/scripts/rofi-drun.sh {cmd}"
+
 # Utils pactl set-sink-volume \@DEFAULT_SINK@ -5%
 bindsym $mod+n exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
 bindsym $mod+m exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
@@ -41,8 +42,6 @@ bindsym $mod+y exec bash ~/.config/scripts/togglegamma.sh
 #
 bindsym $mod+shift+c reload
 bindsym $mod+shift+e exec swaymsg exit
-bindsym $mod+shift+q+semicolon exec systemctl suspend
-bindsym $mod+shift+q+o exec poweroff
     floating_modifier $mod normal
 #
 # Moving around:

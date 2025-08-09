@@ -60,15 +60,15 @@ bindsym $mod+shift+q+o exec poweroff
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
     # Move the focused window
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    bindsym $mod+shift+$left move left
+    bindsym $mod+shift+$down move down
+    bindsym $mod+shift+$up move up
+    bindsym $mod+shift+$right move right
     # Arrows
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    bindsym $mod+shift+Left move left
+    bindsym $mod+shift+Down move down
+    bindsym $mod+shift+Up move up
+    bindsym $mod+shift+Right move right
 # Workspaces:
     # Switch to workspace
     bindsym $mod+1 workspace number 1
@@ -82,16 +82,16 @@ bindsym $mod+shift+q+o exec poweroff
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
+    bindsym $mod+shift+1 move container to workspace number 1
+    bindsym $mod+shift+2 move container to workspace number 2
+    bindsym $mod+shift+3 move container to workspace number 3
+    bindsym $mod+shift+4 move container to workspace number 4
+    bindsym $mod+shift+5 move container to workspace number 5
+    bindsym $mod+shift+6 move container to workspace number 6
+    bindsym $mod+shift+7 move container to workspace number 7
+    bindsym $mod+shift+8 move container to workspace number 8
+    bindsym $mod+shift+9 move container to workspace number 9
+    bindsym $mod+shift+0 move container to workspace number 10
 # Change split mode
     bindsym $mod+b splith
     bindsym $mod+v splitv
@@ -105,11 +105,11 @@ bindsym $mod+shift+q+o exec poweroff
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+shift+space floating toggle
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+shift+minus move scratchpad
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
@@ -135,7 +135,6 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-#
 #
 # Utilities:
     # Special keys to adjust volume via PulseAudio

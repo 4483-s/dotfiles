@@ -37,6 +37,7 @@ bindsym $mod+i exec $menu
 bindsym $mod+n exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
 bindsym $mod+m exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
 bindsym $mod+period exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym $mod+y exec bash ~/.config/scripts/togglegamma.sh
 
 #
 bindsym $mod+shift+c reload

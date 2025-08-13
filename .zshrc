@@ -105,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias v="nvim"
 alias rm="trash-put"
+alias fx="firefox"
 alias pshdt="bash ~/.config/scripts/pushconfig.sh"
 alias plldt="bash ~/.config/scripts/getconfig.sh"
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

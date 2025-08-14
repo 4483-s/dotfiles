@@ -2,7 +2,7 @@
 exec gammastep -O 3990
 exec_always nm-applet
 exec autotiling
-exec lxqt-policykit-agent
+#exec lxqt-policykit-agent
 ##### Variables
 set $mod Mod4
 set $left h

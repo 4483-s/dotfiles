@@ -10,7 +10,22 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = true,
-    opts = { style = "night" },
+    opts = {
+      style = "night",
+      transparent = true,
+      cache = true,
+      styles = {
+        -- Style to be applied to different syntax groups
+        -- Value is any valid attr-list value for `:help nvim_set_hl`
+        comments = {},
+        keywords = { fg = "#fc66ff" },
+        functions = {},
+        variables = {},
+        -- Background styles. Can be "dark", "transparent" or "normal"
+        sidebars = "normal", -- style for sidebars, see below
+        floats = "transparent", -- style for floating windows
+      },
+    },
   },
 
   -- catppuccin

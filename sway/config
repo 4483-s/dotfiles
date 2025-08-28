@@ -27,6 +27,7 @@ tap enabled
 }
 # Hotkeys
 bindsym $mod+o exec $brow
+bindsym $mod+p exec chromium
 bindsym $mod+return exec $menu
 bindsym $mod+q kill
 bindsym $mod+u kill

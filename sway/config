@@ -35,8 +35,8 @@ bindsym $mod+i exec $term
 bindsym $mod+shift+f12 exec rofi -show drun -run-command "$HOME/.config/scripts/rofi-drun.sh {cmd}"
 
 # Utils pactl set-sink-volume \@DEFAULT_SINK@ -5%
-bindsym $mod+n exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-bindsym $mod+m exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym $mod+n exec pactl set-sink-volume \@DEFAULT_SINK@ -1%
+bindsym $mod+m exec pactl set-sink-volume \@DEFAULT_SINK@ +1%
 bindsym $mod+period exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
 bindsym $mod+y exec bash ~/.config/scripts/togglegamma.sh
 

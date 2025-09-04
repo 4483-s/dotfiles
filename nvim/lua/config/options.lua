@@ -1,5 +1,5 @@
 -- -- This file is automatically loaded by plugins.core
-vim.opt.guicursor = "a:block"
+-- vim.opt.guicursor = "a:block"
 -- vim.g.mapleader = " "
 -- vim.g.maplocalleader = "\\"
 --

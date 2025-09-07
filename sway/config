@@ -1,5 +1,9 @@
+client.focused          #4c7899 #00ff44 #ffffff #ffee00   #ff5900
+font pango:DejaVu Sans Mono 2
+# for_window [title="Firefox"] border none
+# for_window [title="kitty"] border pixel 1
 ##### execute on start
-exec gammastep -O 3990
+exec gammastep -O 3900
 exec_always nm-applet
 exec autotiling
 #exec lxqt-policykit-agent
@@ -14,8 +18,10 @@ set $menu rofi -show drun
 set $brow firefox
 ### Output configuration
 title_align center
-output * bg ~/.config/sway/wp9104535-gnu-linux-wallpapers.jpg fill
+output * bg ~/.config/sway/gnufsf.jpg fill
+output HDMI-A-2 bg ~/.config/sway/space.jpg fill
 default_border normal 1
+
 hide_edge_borders both
   exec swayidle -w \
            timeout 450 'swaylock -f -c 000000' \
@@ -32,7 +38,8 @@ bindsym $mod+return exec $menu
 bindsym $mod+q kill
 bindsym $mod+u kill
 bindsym $mod+i exec $term
-bindsym $mod+shift+f12 exec rofi -show drun -run-command "$HOME/.config/scripts/rofi-drun.sh {cmd}"
+bindsym $mod+shift+f12 output HDMI-A-1 toggle
+bindsym $mod+shift+f5 exec rofi -show drun -run-command "$HOME/.config/scripts/rofi-drun.sh {cmd}"
 
 # Utils pactl set-sink-volume \@DEFAULT_SINK@ -5%
 bindsym $mod+n exec pactl set-sink-volume \@DEFAULT_SINK@ -1%
@@ -133,6 +140,12 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+# custom mode
+bindsym $mod+t mode "custom"
+mode "custom" {
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 #
 # Utilities:
     # Special keys to adjust volume via PulseAudio

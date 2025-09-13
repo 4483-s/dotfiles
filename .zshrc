@@ -9,8 +9,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="darkblood"
-ZSH_THEME='bira'
-
+# ZSH_THEME='bira'
+ZSH_THEME='agnoster'
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -113,3 +113,4 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/nvm/init-nvm.sh
 # source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 export MANPAGER='nvim +Man!'
+export DEFAULT_USER='h'

@@ -33,11 +33,10 @@ tap enabled
 }
 # Hotkeys
 bindsym $mod+o exec $brow
-bindsym $mod+p exec chromium
 bindsym $mod+return exec $menu
 bindsym $mod+q kill
-bindsym $mod+shift+u kill
 bindsym $mod+i exec $term
+bindsym $mod+shift+u kill
 bindsym $mod+shift+f12 output HDMI-A-1 toggle
 bindsym $mod+shift+f5 exec rofi -show drun -run-command "$HOME/.config/scripts/rofi-drun.sh {cmd}"
 
@@ -102,11 +101,9 @@ bindsym $mod+shift+e exec swaymsg exit
 #
 #
 #
-    # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
-    # Make the current focus fullscreen
     bindsym $mod+f fullscreen
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+shift+space floating toggle
@@ -148,6 +145,7 @@ mode "custom" {
 }
 #
 # Utilities:
+# For laptop fn + F keys
     # Special keys to adjust volume via PulseAudio
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
@@ -162,7 +160,6 @@ mode "custom" {
 # Bar
 bar {
     swaybar_command waybar
-    # position bottom
 }
 include /etc/sway/config.d/*
 include ./custom.conf

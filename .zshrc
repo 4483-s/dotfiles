@@ -114,3 +114,4 @@ source /usr/share/nvm/init-nvm.sh
 # source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 export MANPAGER='nvim +Man!'
 export DEFAULT_USER='h'
+export AGNOSTER_DIR_BG=magenta

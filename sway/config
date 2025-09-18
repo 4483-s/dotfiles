@@ -138,7 +138,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 # custom mode
-bindsym $mod+t mode "custom"
+# bindsym $mod+t mode "custom"
 mode "custom" {
     bindsym Return mode "default"
     bindsym Escape mode "default"

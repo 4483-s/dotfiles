@@ -36,7 +36,7 @@ bindsym $mod+o exec $brow
 bindsym $mod+return exec $menu
 bindsym $mod+q kill
 bindsym $mod+i exec $term
-bindsym $mod+shift+u kill
+bindsym $mod+y kill
 bindsym $mod+shift+f12 output HDMI-A-1 toggle
 bindsym $mod+shift+f5 exec rofi -show drun -run-command "$HOME/.config/scripts/rofi-drun.sh {cmd}"
 
@@ -44,7 +44,7 @@ bindsym $mod+shift+f5 exec rofi -show drun -run-command "$HOME/.config/scripts/r
 bindsym $mod+n exec pactl set-sink-volume \@DEFAULT_SINK@ -1%
 bindsym $mod+m exec pactl set-sink-volume \@DEFAULT_SINK@ +1%
 bindsym $mod+period exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-bindsym $mod+y exec bash ~/.config/scripts/togglegamma.sh
+bindsym $mod+t exec bash ~/.config/scripts/togglegamma.sh
 
 #
 bindsym $mod+shift+c reload

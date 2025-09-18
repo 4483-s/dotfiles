@@ -1,5 +1,10 @@
-client.focused          #4c7899 #00ff44 #ffffff #ffee00   #ff5900
-font pango:DejaVu Sans Mono 2
+titlebar_padding 1 1
+# titlebar_border_thickness 3
+# client.focused          #4c7899 #00ff44 #ffffff #ffee00   #ff5900
+exec_always swaymsg layout tabbed
+client.focused          #4c7899 #00ff44 #ffffff #ffee00   #00ff44
+font pango:DejaVu Sans Mono 8
+# font pango:DejaVu Sans Mono 10
 # for_window [title="Firefox"] border none
 # for_window [title="kitty"] border pixel 1
 ##### execute on start
@@ -101,6 +106,7 @@ bindsym $mod+shift+e exec swaymsg exit
 #
 #
 #
+# workspace_layout tabbed
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split

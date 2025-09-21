@@ -22,10 +22,10 @@ return {
         --- @deprecated -- tsserver renamed to ts_ls but not yet released, so keep this for now
         --- the proper approach is to check the nvim-lspconfig release version when it's released to determine the server name dynamically
         tsserver = {
-          enabled = true,
+          enabled = false,
         },
         ts_ls = {
-          enabled = true,
+          enabled = false,
         },
         vtsls = {
           -- explicitly add default filetypes, so that we can extend
@@ -56,12 +56,12 @@ return {
                 completeFunctionCalls = true,
               },
               inlayHints = {
-                enumMemberValues = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = false },
+                functionLikeReturnTypes = { enabled = false },
                 parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
+                parameterTypes = { enabled = false },
                 propertyDeclarationTypes = { enabled = true },
-                variableTypes = { enabled = true },
+                variableTypes = { enabled = false },
               },
             },
           },
@@ -263,7 +263,7 @@ return {
 
   -- Filetype icons
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     opts = {
       file = {
         [".eslintrc.js"] = { glyph = "󰱺", hl = "MiniIconsYellow" },

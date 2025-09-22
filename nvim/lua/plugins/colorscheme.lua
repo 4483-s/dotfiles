@@ -6,6 +6,7 @@ return {
       colorscheme = "tokyonight",
     },
   },
+
   -- tokyonight
   {
     "folke/tokyonight.nvim",

@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias gmo="gammastep -O 3900"
 alias v="nvim"
 alias rm="trash-put"
 alias fx="firefox"
@@ -115,3 +116,18 @@ source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 export MANPAGER='nvim +Man!'
 export DEFAULT_USER='h'
 export AGNOSTER_DIR_BG=magenta
+
+# Note: -e lets you specify a dynamically generated value.
+
+# Override default for all listings
+# $LINES is the number of lines that fit on screen.
+zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 5 )) )'
+
+# Override for recent path search only
+zstyle ':autocomplete:recent-paths:*' list-lines 7 
+
+# Override for history search only
+zstyle ':autocomplete:history-incremental-search-backward:*' list-lines 8
+
+# Override for history menu only
+zstyle ':autocomplete:history-search-backward:*' list-lines 2000

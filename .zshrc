@@ -109,25 +109,66 @@ alias rm="trash-put"
 alias fx="firefox"
 alias pshdt="bash ~/.config/scripts/pushconfig.sh"
 alias plldt="bash ~/.config/scripts/getconfig.sh"
+alias nrd='npm run dev'
+alias gcl="git clone"
+alias gc="git commit"
+alias upgd='yay -Syu'
+alias ins='yay -S'
+alias sch='yay -Ss'
+alias rmpg='yay -Rns'
+alias upgrade='sudo pacman -Syu'
+alias sync='sudo pacman -S'
+alias search='pacman -Ss'
+alias remove='sudo pacman -Rns'
+# alias l='eza -lah'
+alias dir="eza --color=always --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+#ls
+alias ls="eza --icons"
+alias l="eza -l --icons --git"
+alias la="eza -lA --icons --git"
+alias ltl="eza -Tl  --icons --git -L"
+alias lt="eza -Tl --icons --git"
+alias lta="eza -Tla --icons --git"
+# alias lss="eza -l --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+# alias lsp="eza -l --git --no-filesize --icons=always --no-time --no-user"
+# alias lsa="eza -lba --git --icons=always --total-size"
+
+# alias j='yazi'
+##############
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/nvm/init-nvm.sh
-source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+export BROWSER='firefox'
+export EDITOR='nvim'
 export MANPAGER='nvim +Man!'
 export DEFAULT_USER='h'
 export AGNOSTER_DIR_BG=magenta
+export PATH=${PATH}:~/.scripts
 
-# Note: -e lets you specify a dynamically generated value.
-
-# Override default for all listings
-# $LINES is the number of lines that fit on screen.
-zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 5 )) )'
-
-# Override for recent path search only
-zstyle ':autocomplete:recent-paths:*' list-lines 7 
-
-# Override for history search only
-zstyle ':autocomplete:history-incremental-search-backward:*' list-lines 8
-
-# Override for history menu only
-zstyle ':autocomplete:history-search-backward:*' list-lines 2000
+setopt hashexecutablesonly
+function j() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# autoload bashcompinit && bashcompinit
+# autoload -Uz compinit
+# compinit
+# # Note: -e lets you specify a dynamically generated value.
+#
+# # Override default for all listings
+# # $LINES is the number of lines that fit on screen.
+# zstyle -e ':autocomplete:*:*' list-lines 'reply=( $(( LINES / 5 )) )'
+#
+# # Override for recent path search only
+# zstyle ':autocomplete:recent-paths:*' list-lines 7 
+#
+# # Override for history search only
+# zstyle ':autocomplete:history-incremental-search-backward:*' list-lines 8
+#
+# # Override for history menu only
+# zstyle ':autocomplete:history-search-backward:*' list-lines 2000

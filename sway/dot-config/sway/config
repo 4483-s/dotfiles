@@ -1,0 +1,161 @@
+# swap monitor position
+# output HDMI-A-1 pos 0 0
+# output HDMI-A-2 pos 1920 0
+#
+# output HDMI-A-1 pos 0 1080
+# output HDMI-A-2 pos 0 0
+#
+# for_window [app_id="firefox"]
+titlebar_padding 1 1
+# titlebar_border_thickness 3
+# client.focused          #4c7899 #00ff44 #ffffff #ffee00   #ff5900
+client.focused          #4c7899 #00ff44 #ffffff #ffee00   #00ff44
+font pango:DejaVu Sans Mono 7
+# for_window [title="Firefox"] border none
+# for_window [title="kitty"] border pixel 1
+#exec lxqt-policykit-agent
+set $mod Mod4
+set $alt Mod1
+set $left h
+set $down j
+set $up k
+set $right l
+set $term kitty
+# set $menu fuzzel
+set $menu rofi -show drun 
+### Output configuration
+title_align center
+output * bg ./img/gnufsf.jpg fill
+output HDMI-A-2 bg ./img/space.jpg fill
+default_border normal 1
+hide_edge_borders both
+# exec_always swayidle -w \
+#          timeout 3 'swaylock -f -c 000000' \
+#          timeout 6 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+exec nm-applet
+exec autotiling
+exec udiskie &
+exec_always gammastep -O 3900
+exec_always swayidle -w \
+timeout 500 'swaylock -f -c 000000' \
+timeout 600 'swaymsg "output HDMI-A-2 power off";swaymsg "output HDMI-A-1 power off";swaymsg "output eDP-1 power off"' \
+resume 'swaymsg "output * power on"' \
+before-sleep 'swaylock -f -c 000000'
+           
+input * { tap enabled }
+set $ct wtype -M ctrl -k tab
+set $cst wtype -M ctrl -M shift -k tab
+set $cw wtype -M ctrl -k w
+bindsym $mod+control+h exec wtype -k left
+bindsym $mod+control+j exec wtype -k Down
+bindsym $mod+control+k exec wtype -k Up
+bindsym $mod+control+l exec wtype -k Right
+bindsym $mod+m exec $ct
+bindsym $mod+n exec $cst
+bindsym $mod+i exec $cw
+# bindsym $mod+o exec bash -c '${BROWSER}'
+bindsym $mod+o exec waterfox
+bindsym $mod+p exec waterfox --private-window
+bindsym $mod+return exec $menu
+bindsym $mod+tab kill
+bindsym $mod+semicolon exec $term
+# bindsym $mod+equal exec $term
+bindsym $mod+bracketleft exec $term
+bindsym $mod+y kill
+bindsym $mod+shift+f11 output HDMI-A-1 toggle
+bindsym $mod+shift+f12 output HDMI-A-2 toggle
+# bindsym $mod+shift+f5 exec rofi -show drun -run-command "$HOME/.config/scripts/rofi-drun.sh {cmd}"
+bindsym $mod+shift+f5 exec rofi -show drun -run-command "$HOME/.scripts/entry.sh
+# bindsym $mod+shift+f5 exec rofi -show drun
+bindsym $mod+f1 exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym $mod+f2 exec pactl set-sink-volume \@DEFAULT_SINK@ -1%
+bindsym $mod+f3 exec pactl set-sink-volume \@DEFAULT_SINK@ +1%
+bindsym $mod+f4 exec bash ${HOME}/.config/sway/scripts/redshift.sh
+#
+bindsym $mod+shift+c reload
+bindsym $mod+shift+e exec swaymsg exit
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+shift+$left move left
+bindsym $mod+shift+$down move down
+bindsym $mod+shift+$up move up
+bindsym $mod+shift+$right move right
+bindsym $mod+shift+Left move left
+bindsym $mod+shift+Down move down
+bindsym $mod+shift+Up move up
+bindsym $mod+shift+Right move right
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+shift+1 move container to workspace number 1
+bindsym $mod+shift+2 move container to workspace number 2
+bindsym $mod+shift+3 move container to workspace number 3
+bindsym $mod+shift+4 move container to workspace number 4
+bindsym $mod+shift+5 move container to workspace number 5
+bindsym $mod+shift+6 move container to workspace number 6
+bindsym $mod+shift+7 move container to workspace number 7
+bindsym $mod+shift+8 move container to workspace number 8
+bindsym $mod+shift+9 move container to workspace number 9
+bindsym $mod+shift+0 move container to workspace number 10
+bindsym $mod+c splith
+bindsym $mod+v splitv
+bindsym $mod+a focus parent
+bindsym $mod+x focus child
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+r mode "resize"
+bindsym $mod+t mode "browsing"
+floating_modifier $mod normal
+mode "resize" {
+bindsym $left resize shrink width 10px
+bindsym $down resize grow height 10px
+bindsym $up resize shrink height 10px
+bindsym $right resize grow width 10px
+bindsym Left resize shrink width 10px
+bindsym Down resize grow height 10px
+bindsym Up resize shrink height 10px
+bindsym Right resize grow width 10px
+bindsym Return mode "default"
+bindsym Escape mode "default"
+}
+mode "browsing" {
+bindsym Return mode "default"
+bindsym Escape mode "default"
+bindsym $mod+$left exec kitty
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym m exec $ct 
+bindsym n exec $cst 
+}
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym Print exec grim
+bar {
+swaybar_command waybar
+}
+include /etc/sway/config.d/*

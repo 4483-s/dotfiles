@@ -13,6 +13,8 @@ import XMonad.Operations
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.SetWMName
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -66,7 +68,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     ,((modm , xK_semicolon), spawn $ XMonad.terminal conf)
     -- ,((modm , xK_u), spawn $ XMonad.terminal conf)
-    ,((modm , xK_u), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
+    ,((modm , xK_m), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
+    ,((modm , xK_n), unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
 
     , ((modm,               xK_o     ), spawn "waterfox")
     -- launch dmenu
@@ -86,7 +89,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
 
     -- Resize viewed windows to the correct size
-    , ((modm,               xK_n     ), refresh)
+    , ((modm,               xK_i     ), refresh)
 
     -- Move focus to the next window
     , ((modm,               xK_Tab   ), windows W.focusDown)
@@ -98,7 +101,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_k     ), windows W.focusUp  )
 
     -- Move focus to the master window
-    , ((modm,               xK_m     ), windows W.focusMaster  )
+    , ((modm,               xK_u     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
     , ((modm,               xK_Return), windows W.swapMaster)
@@ -253,6 +256,9 @@ myLogHook = return ()
 -- By default, do nothing.
 myStartupHook = do 
   spawnOnce "feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &" -- feh set random wallpaper
+  -- setWMName "LG3D"
+  spawnOnce "volumeicon"
+  setWMName "LG3D"
 
 
 ------------------------------------------------------------------------
@@ -261,9 +267,20 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do 
-  -- xmproc <- spawnPipe "xmobar -x 0 /home/h/.config/xmobar/dracula-xmobarrc"
-  xmproc <- spawnPipe "polybar mainbar-xmonad"
-  xmonad $ docks defaults
+    xmproc <- spawnPipe "xmobar -x 0 /home/h/.config/xmobar/myxmo"
+    xmonad $ docks defaults
+    xmonad $ def
+            { logHook = dynamicLogWithPP xmobarPP
+                { ppOutput = hPutStrLn xmproc
+                , ppTitle = xmobarColor "green" "" . shorten 50
+                , ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
+                , ppVisible = xmobarColor "white" ""
+                , ppHidden = xmobarColor "gray" ""
+                , ppHiddenNoWindows = xmobarColor "darkgray" ""
+                , ppUrgent = xmobarColor "red" "" . wrap "!" "!"
+                }
+            }
+ -- xmproc <- spawnPipe "polybar mainbar-xmonad"
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

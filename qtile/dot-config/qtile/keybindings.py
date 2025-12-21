@@ -1,6 +1,16 @@
 from libqtile.lazy import lazy
 from libqtile.config import Key, KeyChord
 
+
+@lazy.function
+def maximize_by_switching_layout(qtile):
+    current_layout_name = qtile.current_group.layout.name
+    if current_layout_name == "monadtall":
+        qtile.current_group.layout = "max"
+    elif current_layout_name == "max":
+        qtile.current_group.layout = "monadtall"
+
+
 mod = "mod4"
 myTerm = "kitty"
 myBrowser = "waterfox"
@@ -10,7 +20,12 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key(
+        [mod],
+        "space",
+        maximize_by_switching_layout(),
+        desc="Move window focus to other window",
+    ),
     Key([mod], "semicolon", lazy.spawn(myTerm), desc="Terminal"),
     Key(
         [mod],

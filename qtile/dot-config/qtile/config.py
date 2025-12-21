@@ -9,8 +9,7 @@ from keybindings import mod, myTerm, keys
 
 # wlr-randr --output HDMI-A-1 --right-of HDMI-A-2
 subprocess.run("wlr-randr --output HDMI-A-1 --right-of HDMI-A-2 &", shell=True)
-subprocess.run("gammastep -O 4455 &", shell=True)
-# gammastep -O 4455 &
+# subprocess.run("gammastep -O 4455 &", shell=True)
 
 
 @lazy.function
@@ -27,10 +26,14 @@ def xdo(qtile, v):
 
 
 keys.append(
-    Key([mod], "m", lazy.spawn("wtype -M ctrl -k tab", shell=True)),
+    Key([mod], "m", lazy.spawn("wtype -M ctrl -k tab;killall wtype", shell=True)),
 )
 keys.append(
-    Key([mod], "n", lazy.spawn("wtype -M ctrl -M shift -k tab", shell=True)),
+    Key(
+        [mod],
+        "n",
+        lazy.spawn("wtype -M ctrl -M shift -k tab;killall wtype", shell=True),
+    ),
 )
 curmod = "Default"
 

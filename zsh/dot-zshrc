@@ -135,7 +135,7 @@ export MANPAGER='nvim +Man!'
 # export MANPAGER="${batman}"
 export DEFAULT_USER=$(whoami)
 # export PATH=${PATH}:~/.scripts
-export PATH=${PATH}:~/.local/bin:~/.cargo/bin
+# export PATH=${PATH}:~/.local/bin:~/.cargo/bin
 setopt hashexecutablesonly
 export j() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

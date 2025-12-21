@@ -15,6 +15,9 @@ import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
+import XMonad.Layout.Spiral
+import XMonad.Layout.Grid
+-- import XMonad.Layout.HintedGrid
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -192,7 +195,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout =avoidStruts ( tiled ||| Mirror tiled ||| Full)
+myLayout =avoidStruts ( tiled ||| Mirror tiled ||| Full ||| Grid|||spiral (6/7) )
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio

@@ -61,7 +61,7 @@ fi
 picom --daemon &
 # feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
 redshift -O 4480
-exec xmonad
-# exec $HOME/.cache/xmonad/xmonad-x86_64-linux
+# exec xmonad
+exec $HOME/.cache/xmonad/xmonad-x86_64-linux
 # exec /usr/bin/qtile start
 # exec /usr/bin/awesome

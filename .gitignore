@@ -1,1 +1,7 @@
 __pycache__
+/xmonad/dot-config/xmonad/xmonad/
+/xmonad/dot-config/xmonad/xmonad-contrib/
+# *xmonad/xmonad-contrib/
+stack.yaml
+stack.yaml.lock
+.stack-work

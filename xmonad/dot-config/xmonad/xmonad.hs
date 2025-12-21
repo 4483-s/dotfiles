@@ -31,7 +31,7 @@ myClickJustFocuses = False
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 1
+myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -67,6 +67,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- ,((modm , xK_u), spawn $ XMonad.terminal conf)
     ,((modm , xK_u), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
 
+    , ((modm,               xK_o     ), spawn "waterfox")
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
 

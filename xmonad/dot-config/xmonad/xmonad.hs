@@ -17,6 +17,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.Spiral
 import XMonad.Layout.Grid
+import XMonad.Hooks.EwmhDesktops
 -- import XMonad.Layout.HintedGrid
 
 import qualified XMonad.StackSet as W
@@ -271,18 +272,7 @@ myStartupHook = do
 --
 main = do 
     xmproc <- spawnPipe "xmobar -x 0 /home/h/.config/xmobar/myxmo"
-    xmonad $ docks defaults
-    xmonad $ def
-            { logHook = dynamicLogWithPP xmobarPP
-                { ppOutput = hPutStrLn xmproc
-                , ppTitle = xmobarColor "green" "" . shorten 50
-                , ppCurrent = xmobarColor "yellow" "" . wrap "[" "]"
-                , ppVisible = xmobarColor "white" ""
-                , ppHidden = xmobarColor "gray" ""
-                , ppHiddenNoWindows = xmobarColor "darkgray" ""
-                , ppUrgent = xmobarColor "red" "" . wrap "!" "!"
-                }
-            }
+    xmonad $ docks $ ewmh $ defaults
  -- xmproc <- spawnPipe "polybar mainbar-xmonad"
 
 -- A structure containing your configuration settings, overriding

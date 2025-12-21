@@ -134,8 +134,7 @@ export EDITOR='nvim'
 export MANPAGER='nvim +Man!'
 # export MANPAGER="${batman}"
 export DEFAULT_USER=$(whoami)
-# export PATH=${PATH}:~/.scripts
-# export PATH=${PATH}:~/.local/bin:~/.cargo/bin
+export PATH=~/.local/bin:~/.cargo/bin:${PATH}
 setopt hashexecutablesonly
 export j() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -196,3 +195,5 @@ alias sv="set -o vi;export AGNOSTER_DIR_BG=30"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 source ~/.scripts/g.sh
+
+[ -f "/home/h/.ghcup/env" ] && . "/home/h/.ghcup/env" # ghcup-env

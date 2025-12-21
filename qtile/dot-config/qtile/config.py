@@ -186,11 +186,20 @@ def init_widgets_list():
             fmt="Disk: {}",
             visible_on_warn=False,
         ),
+        # pactl get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | tr -d ' '
         widget.Volume(
             foreground=colors[7],
             padding=8,
             fmt="Vol: {}",
+            get_volume_command="""pactl get-sink-volume @DEFAULT_SINK@ | awk -F'/' '{print $2}' | tr -d ' '""",
+            volume_down_command="""pactl set-sink-volume @DEFAULT_SINK@ -1%""",
+            volume_up_command="""pactl set-sink-volume @DEFAULT_SINK@ +1%""",
         ),
+        # widget.Volume(
+        #     foreground=colors[7],
+        #     padding=8,
+        #     fmt="Vol: {}",
+        # ),
         widget.Clock(
             foreground=colors[8],
             padding=8,

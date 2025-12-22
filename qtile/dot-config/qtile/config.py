@@ -7,34 +7,9 @@ import colors
 
 from keybindings import mod, myTerm, keys
 
-# wlr-randr --output HDMI-A-1 --right-of HDMI-A-2
 subprocess.run("wlr-randr --output HDMI-A-1 --right-of HDMI-A-2 &", shell=True)
 # subprocess.run("gammastep -O 4455 &", shell=True)
 
-
-@lazy.function
-def xdo(qtile, v):
-    # subprocess.run(
-    #     'xdotool key --window "$(xdotool getwindowfocus)" ctrl+Tab',
-    #     shell=True,
-    #     executable="/bin/bash",
-    # )
-    # subprocess.run(
-    #     f"echo '{qtile}'\n{v} > ~/suc.log", shell=True, executable="/bin/bash"
-    # )
-    subprocess.run(["xdotool", "key", "ctrl+Tab"])
-
-
-keys.append(
-    Key([mod], "m", lazy.spawn("wtype -M ctrl -k tab;killall wtype", shell=True)),
-)
-keys.append(
-    Key(
-        [mod],
-        "n",
-        lazy.spawn("wtype -M ctrl -M shift -k tab;killall wtype", shell=True),
-    ),
-)
 curmod = "Default"
 
 
@@ -308,7 +283,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(

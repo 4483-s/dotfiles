@@ -117,15 +117,12 @@ keys = [
     ),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    # Key([mod], "m", xdo),
-    # Key(
-    #     [mod],
-    #     "m",
-    #     lazy.spawn(
-    #         """xdotool key --window "$(xdotool getwindowfocus)" ctrl+Tab""",
-    #         shell=True,
-    #     ),
-    # ),
+    Key(
+        [mod],
+        "n",
+        lazy.spawn("wtype -M ctrl -M shift -k tab;killall wtype", shell=True),
+    ),
+    Key([mod], "m", lazy.spawn("wtype -M ctrl -k tab;killall wtype", shell=True)),
     Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
     # Switch focus of monitors
     Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),

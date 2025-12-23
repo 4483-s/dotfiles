@@ -132,6 +132,7 @@ source /usr/share/nvm/init-nvm.sh
 export BROWSER='waterfox'
 export EDITOR='nvim'
 export MANPAGER='nvim +Man!'
+# export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 # export MANPAGER="${batman}"
 export DEFAULT_USER=$(whoami)
 export PATH=~/.local/bin:~/.cargo/bin:${PATH}

@@ -62,9 +62,19 @@ picom --daemon &
 # feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
 redshift -O 4480
 # exec xmonad
+if type "xrandr"; then
+  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+    MONITOR=$m polybar --reload base &
+  done
+else
+  polybar --reload base &
+fi
+
 if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
+  echo from cache >>~/.xmonad.log
   exec $HOME/.cache/xmonad/xmonad-x86_64-linux
 else
+  echo from executable >>~/.xmonad.log
   exec xmonad
 fi
 # exec /usr/bin/qtile start

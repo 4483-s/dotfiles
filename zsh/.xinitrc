@@ -58,8 +58,9 @@ fi
 # "$xterm" -geometry 80x50+494+51 &
 # "$xterm" -geometry 80x20+494-0 &
 # exec "$xterm" -geometry 80x66+0+0 -name login
-picom --daemon &
 # feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
+nm-applet &
+picom --daemon &
 redshift -O 4480
 # exec xmonad
 if type "xrandr"; then

@@ -53,8 +53,11 @@ myFocusedBorderColor = "#ff0000"
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
-    -- launch a terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    [ 
+
+-- play
+-- play end
+    ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     ,((modm , xK_semicolon), spawn $ XMonad.terminal conf)
     -- ,((modm , xK_u), spawn $ XMonad.terminal conf)
     ,((modm , xK_m), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")

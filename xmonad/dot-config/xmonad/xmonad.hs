@@ -85,7 +85,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- See also the statusBar function from Hooks.DynamicLog.
     , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
     -- , ((modm              , xK_q     ), spawn "firefox")
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart;echo 8 > ~/ba/xlog")
+    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart && echo 8 > ~/.xmonadcmp.log")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), xmessage help)

@@ -10,6 +10,8 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.Spiral
 import XMonad.Layout.Grid
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Actions.CycleWS (nextScreen)
+import XMonad.Prompt.Zsh
 -- import XMonad.Layout.HintedGrid
 
 import qualified XMonad.StackSet as W
@@ -37,23 +39,16 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ 
 -- play
+--
+-- ((modm .|. controlMask, xK_y), spawn "kitty")
+     ((modm .|. controlMask ,xK_o), spawn "kitty")
 -- play end
-    ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     ,((modm , xK_semicolon), spawn $ XMonad.terminal conf)
-    -- ,((modm , xK_u), spawn $ XMonad.terminal conf)
     ,((modm , xK_m), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
     ,((modm , xK_n), unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
     , ((modm,xK_o), spawn "waterfox")
-    -- , ((modm,xK_v), spawn "waterfox")
-    -- , ("M-v", spawn "firefox")
-    -- launch dmenu
     , ((modm,xK_p), spawn "dmenu_run")
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
-    -- close focused window
-    , ((modm .|. shiftMask, xK_c     ), kill)
     , ((modm , xK_y), kill)
-     -- Rotate through the available layout algorithms
     , ((modm,xK_space), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
@@ -71,17 +66,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-    , ((modm,xK_h     ), sendMessage Shrink)
-    , ((modm,xK_l     ), sendMessage Expand)
+    , ((modm,xK_minus     ), sendMessage Shrink)
+    , ((modm,xK_equal     ), sendMessage Expand)
     , ((modm,xK_t     ), withFocused $ windows . W.sink)
     , ((modm,xK_comma ), sendMessage (IncMasterN 1))
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
+    , ((modm, xK_period), nextScreen)
+    , ((modm .|. controlMask, xK_x), zshPrompt def "/home/h/.local/bin/capture.zsh")
+    -- , ((modm,xK_comma ), sendMessage (IncMasterN 1))
+    -- , ((modm, xK_period), sendMessage (IncMasterN (-1)))
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
-    -- , ((modm              , xK_q     ), spawn "firefox")
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart;echo 8 > ~/ba/xlog")
+    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart && echo 8 > ~/.xmonadcmp.log")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), xmessage help)
@@ -95,17 +92,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
-
-    --
-    -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-    -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
-
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --

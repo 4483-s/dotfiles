@@ -84,7 +84,13 @@ layouts = [
     layout.MonadThreeCol(**layout_theme),
 ]
 
-widget_defaults = dict(font="Ubuntu Bold", fontsize=12, padding=0, background=colors[0])
+widget_defaults = dict(
+    font="Ubuntu Bold",
+    fontsize=12,
+    padding=0,
+    # background=colors[0]
+    background="00000000",
+)
 
 extension_defaults = widget_defaults.copy()
 
@@ -101,7 +107,7 @@ def init_widgets_list():
             borderwidth=3,
             active=colors[8],
             inactive=colors[9],
-            rounded=False,
+            rounded=True,
             highlight_color=colors[0],
             highlight_method="line",
             this_current_screen_border=colors[7],
@@ -114,9 +120,9 @@ def init_widgets_list():
         # widget.WindowName(foreground=colors[6], padding=8, max_chars=40),
         widget.TaskList(
             fmt="<i>{}</i>",
-            border="02f477",
+            border="59045c",
             fontsize=13,
-            background="000000",
+            background="00000000",
             highlight_method="block",
             # foreground="000000",
             # center_aligned=True,
@@ -183,27 +189,31 @@ def init_widgets_screen1():
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
     # del widgets_screen2[16:17]
-    widgets_screen2.append(widget.Systray(padding=6))
+    widgets_screen2.append(
+        widget.Wallpaper(directory=os.path.expanduser("~") + "/Pictures/backgrounds")
+    )
     return widgets_screen2
-
-
-# For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
-# For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 
 
 def init_screens():
     return [
         Screen(
             bottom=bar.Bar(
-                widgets=init_widgets_screen1(), margin=[0, 0, 0, 0], size=18
+                widgets=init_widgets_screen1(),
+                margin=[0, 0, 0, 0],
+                size=18,
+                background="00000000",
             ),
-            wallpaper=os.path.expanduser("~") + "/.config/sway/img/gnufsf.jpg",
+            wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0124.jpg",
+            wallpaper_mode="fill",
         ),
         Screen(
             bottom=bar.Bar(
                 widgets=init_widgets_screen2(), margin=[0, 0, 0, 0], size=18
             ),
-            wallpaper=os.path.expanduser("~") + "/.config/sway/img/gnufsf.jpg",
+            # wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0142.jpg",
+            wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0310.jpg",
+            wallpaper_mode="fill",
         ),
         # Screen(
         #     top=bar.Bar(widgets=init_widgets_screen2(), margin=[8, 12, 0, 12], size=30)

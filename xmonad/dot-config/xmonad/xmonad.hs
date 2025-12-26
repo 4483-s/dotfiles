@@ -12,6 +12,8 @@ import XMonad.Layout.Grid
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.CycleWS (nextScreen)
 import XMonad.Prompt.Zsh
+import XMonad.Layout.NoBorders
+-- import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
 -- import XMonad.Layout.HintedGrid
 
 import qualified XMonad.StackSet as W
@@ -121,7 +123,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout =avoidStruts ( tiled ||| Mirror tiled ||| Full ||| Grid|||spiral (6/7) )
+myLayout =avoidStruts ( smartBorders tiled ||| smartBorders (Mirror  tiled) ||| smartBorders Full ||| Grid|||spiral (6/7) )
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -166,7 +168,7 @@ myManageHook = composeAll
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
 myEventHook = mempty
-
+-- myEventHook = docksEventHook <+> handleEventHook def <+> fullscreenEventHook
 ------------------------------------------------------------------------
 -- Status bars and logging
 
@@ -197,7 +199,7 @@ myStartupHook = do
 main = do 
     -- xmproc <- spawnPipe "xmobar -x 0 /home/h/.config/xmobar/myxmo"
     -- xmproc <- spawnPipe "polybar mainbar-xmonad"
-    xmonad $ docks $ ewmh $ defaults
+    xmonad $ docks $ ewmh $ ewmhFullscreen  $ defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

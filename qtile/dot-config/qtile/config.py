@@ -9,22 +9,6 @@ from keybindings import mod, myTerm, keys
 
 subprocess.run("wlr-randr --output HDMI-A-1 --right-of HDMI-A-2 &", shell=True)
 # subprocess.run("gammastep -O 4455 &", shell=True)
-
-curmod = "Default"
-
-
-# @hook.subscribe.client_focus
-# def client_focus(client):
-#     global curmod
-#     if "Waterfox" in client.name or "Mozilla Firefox" in client.name:
-#         curmod = "water"
-#         subprocess.run(["xdotool", "key", "super+p"])
-#         subprocess.run(f"echo '{client}'>> ~/qtlog", shell=True, executable="/bin/bash")
-#     else:
-#         if curmod == "water":
-#             subprocess.run(["xdotool", "key", "Escape"])
-
-
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
@@ -124,6 +108,7 @@ def init_widgets_list():
             this_screen_border=colors[4],
             other_current_screen_border=colors[7],
             other_screen_border=colors[4],
+            hide_unused=True,
         ),
         widget.CurrentLayout(foreground=colors[1], padding=5, mode="both"),
         # widget.WindowName(foreground=colors[6], padding=8, max_chars=40),

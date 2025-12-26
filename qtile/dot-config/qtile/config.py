@@ -199,7 +199,7 @@ def init_widgets_screen2():
 def init_screens():
     return [
         Screen(
-            bottom=bar.Bar(
+            top=bar.Bar(
                 widgets=init_widgets_screen1(),
                 margin=[0, 0, 0, 0],
                 size=18,
@@ -209,9 +209,7 @@ def init_screens():
             wallpaper_mode="fill",
         ),
         Screen(
-            bottom=bar.Bar(
-                widgets=init_widgets_screen2(), margin=[0, 0, 0, 0], size=18
-            ),
+            top=bar.Bar(widgets=init_widgets_screen2(), margin=[0, 0, 0, 0], size=18),
             # wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0142.jpg",
             wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0124.jpg",
             wallpaper_mode="fill",

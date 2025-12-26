@@ -128,14 +128,14 @@ keys = [
     Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
     Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
     Key([mod], "p", lazy.spawn(f"{myBrowser} --private-window"), desc="Web browser"),
-    # KeyChord(
-    #     [mod],
-    #     "p",
-    #     [
-    #         Key([mod], "n", lazy.spawn("xdotool key 'Control_L+Tab'")),
-    #         Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
-    #         Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
-    #     ],
-    #     name="water",  # ,mode=True
-    # ),
+    KeyChord(
+        [mod],
+        "u",
+        [
+            Key([], "n", lazy.spawn("alacritty")),
+            # Key([], "period", lazy.next_screen()),
+            # Key([], "comma", lazy.prev_screen()),
+        ],
+        name="term",  # ,mode=True
+    ),
 ]

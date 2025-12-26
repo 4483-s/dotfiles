@@ -10,6 +10,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.Spiral
 import XMonad.Layout.Grid
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Actions.Navigation2D
 -- import XMonad.Layout.HintedGrid
 
 import qualified XMonad.StackSet as W
@@ -37,8 +38,11 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ 
 -- play
+--
+-- ((modm .|. controlMask, xK_y), spawn "kitty")
+     ((modm .|. controlMask ,xK_o), spawn "kitty")
 -- play end
-    ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    ,((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
     ,((modm , xK_semicolon), spawn $ XMonad.terminal conf)
     -- ,((modm , xK_u), spawn $ XMonad.terminal conf)
     ,((modm , xK_m), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")

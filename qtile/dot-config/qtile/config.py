@@ -210,7 +210,6 @@ def init_screens():
         ),
         Screen(
             top=bar.Bar(widgets=init_widgets_screen2(), margin=[0, 0, 0, 0], size=18),
-            # wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0142.jpg",
             wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0124.jpg",
             wallpaper_mode="fill",
         ),

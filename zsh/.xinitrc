@@ -4,9 +4,6 @@ prefix="/usr"
 exec_prefix="${prefix}"
 xrdb="xrdb"
 xinitdir="/etc/X11/xinit"
-# xclock="xclock"
-# xterm="xterm"
-# twm="twm"
 xmodmap="xmodmap"
 
 userresources="$HOME/.Xresources"
@@ -53,16 +50,7 @@ if [[ "$(cat /etc/machine-id)" == 6f481e10d8a04e14aeae1d77bfd38de2 ]]; then
   xrandr --output HDMI-2 --pos 0x0 --left-of HDMI-1 &
   xrandr --output HDMI-2 --primary
 fi
-# "$twm" &
-# "$xclock" -geometry 50x50-1+1 &
-# "$xterm" -geometry 80x50+494+51 &
-# "$xterm" -geometry 80x20+494-0 &
-# exec "$xterm" -geometry 80x66+0+0 -name login
-# feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
-nm-applet &
-picom --daemon &
-redshift -O 4480
-# exec xmonad
+
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
     MONITOR=$m polybar --reload base &
@@ -71,12 +59,22 @@ else
   polybar --reload base &
 fi
 
-if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
-  echo from cache >>~/.xmonad.log
-  exec $HOME/.cache/xmonad/xmonad-x86_64-linux
-else
-  echo from executable >>~/.xmonad.log
-  exec xmonad
+# feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
+nm-applet &
+picom --daemon &
+redshift -O 4480
+
+mytwm='xmonad'
+# mytwm='spectrwm'
+# mytwm='qtile start'
+
+if [[ "$mytwm" == 'xmonad' ]]; then
+  if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
+    echo from cache >>~/.xmonad.log
+    exec $HOME/.cache/xmonad/xmonad-x86_64-linux
+  else
+    echo from executable >>~/.xmonad.log
+    exec "$mytwm"
+  fi
 fi
-# exec /usr/bin/qtile start
-# exec /usr/bin/awesome
+exec "$mytwm"

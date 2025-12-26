@@ -44,6 +44,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ,((modm , xK_m), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
     ,((modm , xK_n), unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
     , ((modm,xK_o), spawn "waterfox")
+    -- , ((modm,xK_v), spawn "waterfox")
+    -- , ("M-v", spawn "firefox")
     -- launch dmenu
     , ((modm,xK_p), spawn "dmenu_run")
     -- launch gmrun
@@ -57,8 +59,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     -- Resize viewed windows to the correct size
     , ((modm,xK_i), refresh)
-    -- Move focus to the next window
-    , ((modm,xK_Tab), windows W.focusDown)
     -- Move focus to the next window
     , ((modm,xK_j), windows W.focusDown)
     -- Move focus to the previous window
@@ -79,11 +79,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    , ((modm              , xK_q     ), spawn "xmonad --recompile ; xmonad --restart")
+    , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
+    -- , ((modm              , xK_q     ), spawn "firefox")
+    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart;echo 8 > ~/ba/xlog")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    , ((modm .|. shiftMask, xK_slash ), xmessage help)
     ]
     ++
 
@@ -108,17 +109,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
     -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
+    [ ((modm, button1), \w -> focus w >> mouseMoveWindow w
+                                      >> windows W.shiftMaster)
 
     -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
+    , ((modm, button2), \w -> focus w >> windows W.shiftMaster)
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
+    , ((modm, button3), \w -> focus w >> mouseResizeWindow w
+                                      >> windows W.shiftMaster)
 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]

@@ -74,13 +74,7 @@ ENABLE_CORRECTION="true"
 plugins=(git node python fzf archlinux)
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -91,20 +85,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
-
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias rp="grep -P"
 alias v="nvim"
-# alias rm="trash-put"
 alias fx="waterfox"
 alias pshdt="bash ~/.config/scripts/pushconfig.sh"
 alias plldt="bash ~/.config/scripts/getconfig.sh"
@@ -190,11 +172,7 @@ a(){
 
 export AGNOSTER_DIR_BG=56
 export AGNOSTER_DIR_FG=193
-
-alias se="set -o emacs;export AGNOSTER_DIR_BG=56"
-alias sv="set -o vi;export AGNOSTER_DIR_BG=30"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 source ~/.scripts/g.sh
-
 [ -f "/home/h/.ghcup/env" ] && . "/home/h/.ghcup/env" # ghcup-env

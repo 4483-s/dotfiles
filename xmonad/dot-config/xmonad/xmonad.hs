@@ -7,12 +7,13 @@ import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
-import XMonad.Layout.Spiral
-import XMonad.Layout.Grid
+-- import XMonad.Layout.Spiral
+-- import XMonad.Layout.Grid
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.CycleWS (nextScreen)
 import XMonad.Prompt.Zsh
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
 -- import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
 -- import XMonad.Layout.HintedGrid
 
@@ -32,8 +33,8 @@ myModMask       = mod4Mask
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#282a36"
+myFocusedBorderColor = "#f34fff"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -123,7 +124,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout =avoidStruts ( smartBorders tiled ||| smartBorders (Mirror  tiled) ||| smartBorders Full ||| Grid|||spiral (6/7) )
+-- myLayout =avoidStruts ( smartBorders tiled ||| smartBorders (Mirror  tiled) ||| smartBorders Full ||| Grid|||spiral (6/7) )
+-- simpleTabbedRight, tabbedRight, addTabsRight
+myLayout =avoidStruts ( smartBorders tiled ||| smartBorders Full ||| smartBorders simpleTabbed |||simpleTabbedLeftAlways)
+
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio

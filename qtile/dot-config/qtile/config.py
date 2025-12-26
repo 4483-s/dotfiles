@@ -176,6 +176,7 @@ def init_widgets_list():
             format="%I:%M %p",
         ),
         # widget.Systray(padding=6),
+        widget.Battery(),
     ]
     return widgets_list
 
@@ -204,7 +205,7 @@ def init_screens():
                 size=18,
                 background="00000000",
             ),
-            wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0124.jpg",
+            wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0310.jpg",
             wallpaper_mode="fill",
         ),
         Screen(
@@ -212,7 +213,7 @@ def init_screens():
                 widgets=init_widgets_screen2(), margin=[0, 0, 0, 0], size=18
             ),
             # wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0142.jpg",
-            wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0310.jpg",
+            wallpaper=os.path.expanduser("~") + "/Pictures/backgrounds/0124.jpg",
             wallpaper_mode="fill",
         ),
         # Screen(

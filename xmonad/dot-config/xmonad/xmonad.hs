@@ -7,6 +7,7 @@ import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
+import XMonad.Util.EZConfig
 -- import XMonad.Layout.Spiral
 -- import XMonad.Layout.Grid
 import XMonad.Hooks.EwmhDesktops
@@ -39,62 +40,43 @@ myFocusedBorderColor = "#f34fff"
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
+
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ 
--- play
---
--- ((modm .|. controlMask, xK_y), spawn "kitty")
-     ((modm .|. controlMask ,xK_o), spawn "kitty")
--- play end
-    ,((modm , xK_semicolon), spawn $ XMonad.terminal conf)
-    ,((modm , xK_m), unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
-    ,((modm , xK_n), unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
-    , ((modm,xK_o), spawn "waterfox")
-    , ((modm,xK_p), spawn "dmenu_run")
-    , ((modm , xK_y), kill)
-    , ((modm,xK_space), sendMessage NextLayout)
-    --  Reset the layouts on the current workspace to default
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    -- Resize viewed windows to the correct size
-    , ((modm,xK_i), refresh)
-    -- Move focus to the next window
-    , ((modm,xK_j), windows W.focusDown)
-    -- Move focus to the previous window
-    , ((modm,xK_k), windows W.focusUp  )
-    -- Move focus to the master window
+     ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     , ((modm,xK_u), windows W.focusMaster  )
-    -- Swap the focused window and the master window
-    , ((modm,xK_Return), windows W.swapMaster)
-    -- Swap the focused window with the next window
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-    -- Swap the focused window with the previous window
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-    , ((modm,xK_minus     ), sendMessage Shrink)
-    , ((modm,xK_equal     ), sendMessage Expand)
-    , ((modm,xK_t     ), withFocused $ windows . W.sink)
-    , ((modm,xK_comma ), sendMessage (IncMasterN 1))
-    , ((modm, xK_period), nextScreen)
-    , ((modm .|. controlMask, xK_x), zshPrompt def "/home/h/.local/bin/capture.zsh")
-    -- , ((modm,xK_comma ), sendMessage (IncMasterN 1))
-    -- , ((modm, xK_period), sendMessage (IncMasterN (-1)))
-    -- Toggle the status bar gap
-    -- Use this binding with avoidStruts from Hooks.ManageDocks.
-    -- See also the statusBar function from Hooks.DynamicLog.
     , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart && echo 8 > ~/.xmonadcmp.log")
-
-    -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_slash ), xmessage help)
+    , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
     ]
     ++
-
-    --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
-    --
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+
+ezKeybindings = [ 
+-- ("M-S-z", spawn "xscreensaver-command -lock")
+-- , ("M-C-s", unGrab *> spawn "scrot -s"        )
+           ("M-;"        , spawn myTerminal)
+        ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
+        ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
+        ,  ("M-i"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+w")
+        ,  ("M-o"        , spawn "waterfox")
+        ,  ("M-p"        , spawn "dmenu_run")
+        ,  ("M-y"        , kill)
+        ,  ("M-j"        , windows W.focusDown)
+        ,  ("M-k"        , windows W.focusUp)
+        ,  ("M-."        , nextScreen)
+        ,  ("M-<Space>"  , sendMessage NextLayout)
+        ,  ("M-<Return>" , zshPrompt def "/home/h/.local/bin/capture.zsh")
+        ,  ("M--"        , sendMessage Shrink)
+        ,  ("M-="        , sendMessage Expand)
+        ,  ("M-S-j"      , windows W.swapDown  )
+        ,  ("M-S-k"      , windows W.swapUp    )
+        ,  ("M-t"        , withFocused $ windows . W.sink)
+        ,  ("M-,"        , sendMessage (IncMasterN 1))
+     ]
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
@@ -123,10 +105,45 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 --
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
---
+-- activeColor        
+-- inactiveColor      
+-- urgentColor        
+-- activeBorderColor  
+-- inactiveBorderColor
+-- urgentBorderColor  
+-- activeBorderWidth  
+-- inactiveBorderWidth
+-- urgentBorderWidth  
+-- activeTextColor    
+-- inactiveTextColor  
+-- urgentTextColor    
+-- fontName           
+-- decoWidth          
+-- decoHeight         
+-- windowTitleAddons  
+-- windowTitleIcons   
+myTabConfig = def {
+  activeColor = "#04ddf9",
+  activeTextColor = "#490b13",
+  inactiveColor = "#333333",
+  decoHeight = 15,
+  activeBorderWidth = 0,
+  inactiveBorderWidth =0,
+  urgentBorderWidth=0
+  }
+
+    --   simpleTabbed, tabbed, addTabs
+    -- , simpleTabbedAlways, tabbedAlways, addTabsAlways
+    -- , simpleTabbedBottom, tabbedBottom, addTabsBottom
+    -- , simpleTabbedLeft, tabbedLeft, addTabsLeft
+    -- , simpleTabbedRight, tabbedRight, addTabsRight
+    -- , simpleTabbedBottomAlways, tabbedBottomAlways, addTabsBottomAlways
+    -- , simpleTabbedLeftAlways, tabbedLeftAlways, addTabsLeftAlways
+    -- , simpleTabbedRightAlways, tabbedRightAlways, addTabsRightAlways
+
 -- myLayout =avoidStruts ( smartBorders tiled ||| smartBorders (Mirror  tiled) ||| smartBorders Full ||| Grid|||spiral (6/7) )
 -- simpleTabbedRight, tabbedRight, addTabsRight
-myLayout =avoidStruts ( smartBorders tiled ||| smartBorders Full ||| smartBorders simpleTabbed |||simpleTabbedLeftAlways)
+myLayout =avoidStruts ( smartBorders tiled ||| smartBorders( noBorders(tabbed shrinkText myTabConfig)))
 
   where
      -- default tiling algorithm partitions the screen into two panes
@@ -190,7 +207,8 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do 
-  spawnOnce "feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &"
+  -- spawnOnce "feh --bg-fill ~/Pictures/backgrounds/0142.jpg &"
+  spawnOnce "feh --randomize --bg-fill ~/Pictures/backgrounds/*"  -- feh set random wallpaper
   spawnOnce "volumeicon"
   setWMName "LG3D"
 
@@ -233,7 +251,7 @@ defaults = def {
         logHook            = myLogHook,
         startupHook        = myStartupHook
     }
-
+ `additionalKeysP` ezKeybindings
 -- | Finally, a copy of the default bindings in simple textual tabular format.
 help :: String
 help = unlines ["The default modifier key is 'alt'. Default keybindings:",

@@ -1,3 +1,75 @@
+-- -- Base
+-- import XMonad
+-- import System.Directory
+-- import System.IO (hClose, hPutStr, hPutStrLn)
+-- import System.Exit (exitSuccess)
+-- import qualified XMonad.StackSet as W
+--
+--     -- Actions
+-- import XMonad.Actions.CopyWindow (kill1)
+-- import XMonad.Actions.CycleWS (Direction1D(..), moveTo, shiftTo, WSType(..), nextScreen, prevScreen)
+-- import XMonad.Actions.GridSelect
+-- import XMonad.Actions.MouseResize
+-- import XMonad.Actions.Promote
+-- import XMonad.Actions.RotSlaves (rotSlavesDown, rotAllDown)
+-- import XMonad.Actions.WindowGo (runOrRaise)
+-- import XMonad.Actions.WithAll (sinkAll, killAll)
+-- import qualified XMonad.Actions.Search as S
+--
+--     -- Data
+-- import Data.Char (isSpace, toUpper)
+-- import Data.Maybe (fromJust)
+-- import Data.Monoid
+-- import Data.Maybe (isJust)
+-- import Data.Tree
+-- import qualified Data.Map as M
+--
+--     -- Hooks
+-- import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+-- import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
+-- import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks, ToggleStruts(..))
+-- import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doCenterFloat)
+-- import XMonad.Hooks.ServerMode
+-- import XMonad.Hooks.SetWMName
+-- import XMonad.Hooks.StatusBar
+-- import XMonad.Hooks.StatusBar.PP
+-- import XMonad.Hooks.WindowSwallowing
+-- import XMonad.Hooks.WorkspaceHistory
+--
+--     -- Layouts
+-- import XMonad.Layout.Accordion
+-- import XMonad.Layout.GridVariants (Grid(Grid))
+-- import XMonad.Layout.SimplestFloat
+-- import XMonad.Layout.Spiral
+-- import XMonad.Layout.ResizableTile
+-- import XMonad.Layout.Tabbed
+-- import XMonad.Layout.ThreeColumns
+--
+--     -- Layouts modifiers
+-- import XMonad.Layout.LayoutModifier
+-- import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
+-- import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
+-- import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
+-- import XMonad.Layout.NoBorders
+-- import XMonad.Layout.Renamed
+-- import XMonad.Layout.ShowWName
+-- import XMonad.Layout.Simplest
+-- import XMonad.Layout.Spacing
+-- import XMonad.Layout.SubLayouts
+-- import XMonad.Layout.WindowArranger (windowArrange, WindowArrangerMsg(..))
+-- import XMonad.Layout.WindowNavigation
+-- import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(Toggle))
+-- import qualified XMonad.Layout.MultiToggle as MT (Toggle(..))
+--
+--    -- Utilities
+-- import XMonad.Util.Dmenu
+-- import XMonad.Util.EZConfig (additionalKeysP, mkNamedKeymap)
+-- import XMonad.Util.Hacks (windowedFullscreenFixEventHook, javaHack, trayerAboveXmobarEventHook, trayAbovePanelEventHook, trayerPaddingXmobarEventHook, trayPaddingXmobarEventHook, trayPaddingEventHook)
+-- import XMonad.Util.NamedActions
+-- import XMonad.Util.NamedScratchpad
+-- import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
+-- import XMonad.Util.SpawnOnce
+--------
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -8,16 +80,11 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Util.EZConfig
--- import XMonad.Layout.Spiral
--- import XMonad.Layout.Grid
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.CycleWS (nextScreen)
 import XMonad.Prompt.Zsh
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
--- import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
--- import XMonad.Layout.HintedGrid
-
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 myTerminal      = "kitty"
@@ -31,15 +98,10 @@ myClickJustFocuses = False
 myBorderWidth   = 2
 myModMask       = mod4Mask
 
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 myNormalBorderColor  = "#282a36"
 myFocusedBorderColor = "#f34fff"
-
-------------------------------------------------------------------------
--- Key bindings. Add, modify or remove key bindings here.
---
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ 
@@ -49,8 +111,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
     ]
     ++
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
     [((m .|. modm, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
@@ -175,6 +235,9 @@ myLayout =avoidStruts ( smartBorders tiled ||| smartBorders( noBorders(tabbed sh
 --
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
+    , className =? "confirm"         --> doFloat
+    , className =? "file_progress"   --> doFloat
+    , className =? "dialog"          --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
@@ -252,53 +315,3 @@ defaults = def {
         startupHook        = myStartupHook
     }
  `additionalKeysP` ezKeybindings
--- | Finally, a copy of the default bindings in simple textual tabular format.
-help :: String
-help = unlines ["The default modifier key is 'alt'. Default keybindings:",
-    "",
-    "-- launching and killing programs",
-    "mod-Shift-Enter  Launch xterminal",
-    "mod-p            Launch dmenu",
-    "mod-Shift-p      Launch gmrun",
-    "mod-Shift-c      Close/kill the focused window",
-    "mod-Space        Rotate through the available layout algorithms",
-    "mod-Shift-Space  Reset the layouts on the current workSpace to default",
-    "mod-n            Resize/refresh viewed windows to the correct size",
-    "",
-    "-- move focus up or down the window stack",
-    "mod-Tab        Move focus to the next window",
-    "mod-Shift-Tab  Move focus to the previous window",
-    "mod-j          Move focus to the next window",
-    "mod-k          Move focus to the previous window",
-    "mod-m          Move focus to the master window",
-    "",
-    "-- modifying the window order",
-    "mod-Return   Swap the focused window and the master window",
-    "mod-Shift-j  Swap the focused window with the next window",
-    "mod-Shift-k  Swap the focused window with the previous window",
-    "",
-    "-- resizing the master/slave ratio",
-    "mod-h  Shrink the master area",
-    "mod-l  Expand the master area",
-    "",
-    "-- floating layer support",
-    "mod-t  Push window back into tiling; unfloat and re-tile it",
-    "",
-    "-- increase or decrease number of windows in the master area",
-    "mod-comma  (mod-,)   Increment the number of windows in the master area",
-    "mod-period (mod-.)   Deincrement the number of windows in the master area",
-    "",
-    "-- quit, or restart",
-    "mod-Shift-q  Quit xmonad",
-    "mod-q        Restart xmonad",
-    "mod-[1..9]   Switch to workSpace N",
-    "",
-    "-- Workspaces & screens",
-    "mod-Shift-[1..9]   Move client to workspace N",
-    "mod-{w,e,r}        Switch to physical/Xinerama screens 1, 2, or 3",
-    "mod-Shift-{w,e,r}  Move client to screen 1, 2, or 3",
-    "",
-    "-- Mouse bindings: default actions bound to mouse events",
-    "mod-button1  Set the window to floating mode and move by dragging",
-    "mod-button2  Raise the window to the top of the stack",
-    "mod-button3  Set the window to floating mode and resize by dragging"]

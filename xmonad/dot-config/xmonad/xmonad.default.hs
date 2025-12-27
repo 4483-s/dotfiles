@@ -123,13 +123,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
-    , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -"))
+    , ((modm .|. shiftMask, xK_slash ), xmessage help)
     ]
     ++
 
@@ -154,18 +154,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 
     -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
+    [ ((modm, button1), \w -> focus w >> mouseMoveWindow w
+                                      >> windows W.shiftMaster)
 
     -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
+    , ((modm, button2), \w -> focus w >> windows W.shiftMaster)
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
+    , ((modm, button3), \w -> focus w >> mouseResizeWindow w
+                                      >> windows W.shiftMaster)
 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
@@ -293,6 +293,7 @@ help = unlines ["The default modifier key is 'alt'. Default keybindings:",
     "mod-Space        Rotate through the available layout algorithms",
     "mod-Shift-Space  Reset the layouts on the current workSpace to default",
     "mod-n            Resize/refresh viewed windows to the correct size",
+    "mod-Shift-/      Show this help message with the default keybindings",
     "",
     "-- move focus up or down the window stack",
     "mod-Tab        Move focus to the next window",

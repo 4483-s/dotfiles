@@ -99,7 +99,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
      ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     , ((modm,xK_u), windows W.focusMaster  )
     , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
-    , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
+    -- , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
+    , ((modm , xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
     ]
     ++
     [((m .|. modm, k), windows $ f i)

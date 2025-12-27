@@ -1,9 +1,9 @@
 -- -- Base
--- import XMonad
+import XMonad
 -- import System.Directory
 -- import System.IO (hClose, hPutStr, hPutStrLn)
 -- import System.Exit (exitSuccess)
--- import qualified XMonad.StackSet as W
+import qualified XMonad.StackSet as W
 --
 --     -- Actions
 -- import XMonad.Actions.CopyWindow (kill1)
@@ -19,18 +19,18 @@
 --     -- Data
 -- import Data.Char (isSpace, toUpper)
 -- import Data.Maybe (fromJust)
--- import Data.Monoid
+import Data.Monoid
 -- import Data.Maybe (isJust)
 -- import Data.Tree
--- import qualified Data.Map as M
+import qualified Data.Map as M
 --
 --     -- Hooks
 -- import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
--- import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
+import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
 -- import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks, ToggleStruts(..))
 -- import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, doCenterFloat)
 -- import XMonad.Hooks.ServerMode
--- import XMonad.Hooks.SetWMName
+import XMonad.Hooks.SetWMName
 -- import XMonad.Hooks.StatusBar
 -- import XMonad.Hooks.StatusBar.PP
 -- import XMonad.Hooks.WindowSwallowing
@@ -50,7 +50,7 @@
 -- import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 -- import XMonad.Layout.MultiToggle (mkToggle, single, EOT(EOT), (??))
 -- import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL, MIRROR, NOBORDERS))
--- import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders
 -- import XMonad.Layout.Renamed
 -- import XMonad.Layout.ShowWName
 -- import XMonad.Layout.Simplest
@@ -63,30 +63,21 @@
 --
 --    -- Utilities
 -- import XMonad.Util.Dmenu
--- import XMonad.Util.EZConfig (additionalKeysP, mkNamedKeymap)
+import XMonad.Util.EZConfig (additionalKeysP, mkNamedKeymap)
 -- import XMonad.Util.Hacks (windowedFullscreenFixEventHook, javaHack, trayerAboveXmobarEventHook, trayAbovePanelEventHook, trayerPaddingXmobarEventHook, trayPaddingXmobarEventHook, trayPaddingEventHook)
 -- import XMonad.Util.NamedActions
 -- import XMonad.Util.NamedScratchpad
--- import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
--- import XMonad.Util.SpawnOnce
---------
-import XMonad
-import Data.Monoid
-import System.Exit
-import XMonad.Operations
+import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
-import XMonad.Util.Run
+--------
+import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.SetWMName
-import XMonad.Util.EZConfig
-import XMonad.Hooks.EwmhDesktops
 import XMonad.Actions.CycleWS (nextScreen)
 import XMonad.Prompt.Zsh
-import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
+import XMonad.Actions.Navigation2D
+import XMonad.Layout.Grid
 myTerminal      = "kitty"
 
 myFocusFollowsMouse :: Bool
@@ -125,6 +116,8 @@ ezKeybindings = [
         ,  ("M-o"        , spawn "waterfox")
         ,  ("M-p"        , spawn "dmenu_run")
         ,  ("M-y"        , kill)
+        ,  ("M-l"        , windows W.focusDown)
+        ,  ("M-h"        , windows W.focusUp)
         ,  ("M-j"        , windows W.focusDown)
         ,  ("M-k"        , windows W.focusUp)
         ,  ("M-."        , nextScreen)
@@ -132,14 +125,11 @@ ezKeybindings = [
         ,  ("M-<Return>" , zshPrompt def "/home/h/.local/bin/capture.zsh")
         ,  ("M--"        , sendMessage Shrink)
         ,  ("M-="        , sendMessage Expand)
-        ,  ("M-S-j"      , windows W.swapDown  )
-        ,  ("M-S-k"      , windows W.swapUp    )
+        ,  ("M-S-l"      , windows W.swapDown)
+        ,  ("M-S-h"      , windows W.swapUp)
         ,  ("M-t"        , withFocused $ windows . W.sink)
         ,  ("M-,"        , sendMessage (IncMasterN 1))
      ]
-------------------------------------------------------------------------
--- Mouse bindings: default actions bound to mouse events
---
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), \w -> focus w >> mouseMoveWindow w
@@ -155,16 +145,6 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
-------------------------------------------------------------------------
--- Layouts:
-
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
 -- activeColor        
 -- inactiveColor      
 -- urgentColor        
@@ -183,6 +163,8 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- windowTitleAddons  
 -- windowTitleIcons   
 myTabConfig = def {
+-- fontName = "xft:JetBrains Mono:regular:size=9:antialias=true:hinting=true",
+  -- fontName = "xft:Ubuntu:bold:size=60",
   activeColor = "#04ddf9",
   activeTextColor = "#490b13",
   inactiveColor = "#333333",
@@ -203,7 +185,7 @@ myTabConfig = def {
 
 -- myLayout =avoidStruts ( smartBorders tiled ||| smartBorders (Mirror  tiled) ||| smartBorders Full ||| Grid|||spiral (6/7) )
 -- simpleTabbedRight, tabbedRight, addTabsRight
-myLayout =avoidStruts ( smartBorders tiled ||| smartBorders( noBorders(tabbed shrinkText myTabConfig)))
+myLayout =avoidStruts ( smartBorders tiled ||| smartBorders( noBorders(tabbed shrinkText myTabConfig))||| smartBorders Grid)
 
   where
      -- default tiling algorithm partitions the screen into two panes
@@ -281,10 +263,15 @@ myStartupHook = do
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
+my2D = navigation2DP def
+                              ("<Up>", "<Left>", "<Down>", "<Right>")
+                              [("M-",   windowGo  ),
+                               ("M-S-", windowSwap)]
+                              False
 main = do 
     -- xmproc <- spawnPipe "xmobar -x 0 /home/h/.config/xmobar/myxmo"
     -- xmproc <- spawnPipe "polybar mainbar-xmonad"
-    xmonad $ docks $ ewmh $ ewmhFullscreen  $ defaults
+    xmonad $ docks $ ewmh $ ewmhFullscreen $ my2D $ defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

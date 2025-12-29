@@ -78,6 +78,13 @@ import XMonad.Prompt.Zsh
 import XMonad.Layout.Tabbed
 import XMonad.Actions.Navigation2D
 import XMonad.Layout.Grid
+import XMonad.Hooks.WindowSwallowing
+import XMonad.Actions.PerLayoutKeys
+--
+-- >   ,((0, xK_F2), bindByLayout [("Tall", spawn "rxvt"), ("Mirror Tall", spawn "xeyes"), ("", spawn "xmessage hello")])
+--
+-- and using 'swallowEventHook' somewhere in your 'handleEventHook', for example:
+--
 myTerminal      = "kitty"
 
 myFocusFollowsMouse :: Bool
@@ -101,6 +108,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
     -- , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
     , ((modm , xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
+
+            -- ,((modm, xK_a), bindByLayout [("Tabbed Simplest", spawn "kitty"), ("Tall", spawn "alacritty"), ("", spawn "xmessage hello")])
+
     ]
     ++
     [((m .|. modm, k), windows $ f i)
@@ -130,7 +140,18 @@ ezKeybindings = [
         ,  ("M-S-h"      , windows W.swapUp)
         ,  ("M-t"        , withFocused $ windows . W.sink)
         ,  ("M-,"        , sendMessage (IncMasterN 1))
+        -- ,  ("M-j", bindByLayout [
+        --         ("Tabbed Simplest", spawn "kitty")
+        --     ,   ("Tall", spawn "alacritty")
+        --     ,   ("", spawn "xmessage hello")
+        --       ])
+
      ]
+-- my2D = navigation2DP def
+--                               ("<Up>", "<Left>", "<Down>", "<Right>")
+--                               [("M-",   windowGo  ),
+--                                ("M-S-", windowSwap)]
+--                               False
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), \w -> focus w >> mouseMoveWindow w
@@ -164,12 +185,13 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- windowTitleAddons  
 -- windowTitleIcons   
 myTabConfig = def {
+-- myFont = "xft:SauceCodePro Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
 -- fontName = "xft:JetBrains Mono:regular:size=9:antialias=true:hinting=true",
-  -- fontName = "xft:Ubuntu:bold:size=60",
+  fontName = "xft:Ubuntu Mono:bold:size=9",
   activeColor = "#04ddf9",
   activeTextColor = "#490b13",
   inactiveColor = "#333333",
-  decoHeight = 15,
+  decoHeight = 13,
   activeBorderWidth = 0,
   inactiveBorderWidth =0,
   urgentBorderWidth=0
@@ -234,7 +256,9 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+-- myEventHook = mempty
+
+myEventHook= swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
 -- myEventHook = docksEventHook <+> handleEventHook def <+> fullscreenEventHook
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -255,7 +279,7 @@ myLogHook = return ()
 myStartupHook = do 
   -- spawnOnce "feh --bg-fill ~/Pictures/backgrounds/0142.jpg &"
   spawnOnce "feh --randomize --bg-fill ~/Pictures/backgrounds/*"  -- feh set random wallpaper
-  spawnOnce "volumeicon"
+  spawnOnce "xscreensaver --no-splash &"
   setWMName "LG3D"
 
 
@@ -264,15 +288,11 @@ myStartupHook = do
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-my2D = navigation2DP def
-                              ("<Up>", "<Left>", "<Down>", "<Right>")
-                              [("M-",   windowGo  ),
-                               ("M-S-", windowSwap)]
-                              False
 main = do 
     -- xmproc <- spawnPipe "xmobar -x 0 /home/h/.config/xmobar/myxmo"
     -- xmproc <- spawnPipe "polybar mainbar-xmonad"
-    xmonad $ docks $ ewmh $ ewmhFullscreen $ my2D $ defaults
+    xmonad $ docks $ ewmh $ ewmhFullscreen $ defaults
+    -- xmonad $ docks $ ewmh $ ewmhFullscreen $ my2D $ defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

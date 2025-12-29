@@ -24,7 +24,6 @@ keys = [
         [mod],
         "space",
         maximize_by_switching_layout(),
-        desc="Move window focus to other window",
     ),
     Key([mod], "semicolon", lazy.spawn(myTerm), desc="Terminal"),
     Key(

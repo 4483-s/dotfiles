@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="darkblood"
 # ZSH_THEME='bira'
-ZSH_THEME='agnoster'
+# ZSH_THEME='agnoster'
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -71,7 +71,8 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node python fzf archlinux)
+# plugins=(git node python fzf archlinux)
+plugins=(git fzf archlinux)
 
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
@@ -101,6 +102,7 @@ alias ltt="eza --icons=auto  -T --git"
 alias lt="eza --icons=auto  -Tl --git"
 alias lta="eza --icons=auto  -Tla --git"
 alias lsp="eza --icons=auto  -l --git --no-filesize --no-time --no-user"
+alias sss="systemctl"
 # alias lss="eza -l --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 # alias lsa="eza -lba --git --icons=always --total-size"
 alias se="set -o emacs"
@@ -167,8 +169,8 @@ a(){
   man $@ | bat --language=man
 }
 export MANPAGER='nvim +Man!'
-export AGNOSTER_DIR_BG=56
-export AGNOSTER_DIR_FG=193
+# export AGNOSTER_DIR_BG=56
+# export AGNOSTER_DIR_FG=193
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 source ~/.scripts/g.sh

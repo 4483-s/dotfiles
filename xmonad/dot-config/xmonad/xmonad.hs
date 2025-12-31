@@ -93,7 +93,7 @@ myFocusFollowsMouse = True
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
-myBorderWidth   = 2
+myBorderWidth   = 1
 myModMask       = mod4Mask
 
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
@@ -130,8 +130,8 @@ ezKeybindings = [
         ,  ("M-y"        , kill)
         ,  ("M-l"        , windows W.focusDown)
         ,  ("M-h"        , windows W.focusUp)
-        ,  ("M-j"        , windows W.focusDown)
-        ,  ("M-k"        , windows W.focusUp)
+        -- ,  ("M-j"        , windows W.focusDown)
+        -- ,  ("M-k"        , windows W.focusUp)
         ,  ("M-."        , nextScreen)
         ,  ("M-<Space>"  , sendMessage NextLayout)
         ,  ("M-<Return>" , zshPrompt def "/home/h/.local/bin/capture.zsh")
@@ -141,14 +141,24 @@ ezKeybindings = [
         ,  ("M-S-h"      , windows W.swapUp)
         ,  ("M-t"        , withFocused $ windows . W.sink)
         ,  ("M-,"        , sendMessage (IncMasterN 1))
-        -- ,  ("M-j", bindByLayout [
-        --         ("Tabbed Simplest", spawn "kitty")
-        --     ,   ("Tall", spawn "alacritty")
-        --     ,   ("", spawn "xmessage hello")
-        --       ])
+        ,  ("M-<F2>"        , spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%")
+        ,  ("M-<F3>"        , spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%")
+        ,  ("M-j", bindByLayout [
+               ("Tabbed Simplest", windows W.focusUp)
+            ,  ("", windows W.focusDown)
+              ])
+        ,  ("M-k", bindByLayout [
+               ("Tabbed Simplest", windows W.focusDown)
+            ,  ("", windows W.focusUp)
+              ])
 
-     ]
--- my2D = navigation2DP def
+     ] 
+     -- ++ 
+     --  [ ("M-d",spawn "alacritty")
+     --        | c <- ["alacritty"] 
+     --        , let keyBinding = ("M-d", spawn "kitty")
+     --        ]
+     -- my2D = navigation2DP def
 --                               ("<Up>", "<Left>", "<Down>", "<Right>")
 --                               [("M-",   windowGo  ),
 --                                ("M-S-", windowSwap)]

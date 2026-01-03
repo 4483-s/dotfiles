@@ -80,11 +80,17 @@ import XMonad.Actions.Navigation2D
 import XMonad.Layout.Grid
 import XMonad.Hooks.WindowSwallowing
 import XMonad.Actions.PerLayoutKeys
---
--- >   ,((0, xK_F2), bindByLayout [("Tall", spawn "rxvt"), ("Mirror Tall", spawn "xeyes"), ("", spawn "xmessage hello")])
---
--- and using 'swallowEventHook' somewhere in your 'handleEventHook', for example:
---
+import XMonad.Actions.WindowGo (runOrRaise, ifWindow)
+import Data.List (isInfixOf)
+
+spawnBasedOnFocus :: X ()
+spawnBasedOnFocus = withFocused $ \w -> do
+    cls <- runQuery className w
+    case cls of
+        c | "kitty"     `isInfixOf` c -> spawn "kitty"
+          | "Alacritty" `isInfixOf` c -> spawn "alacritty"
+        _                             -> spawn "firefox"
+
 myTerminal      = "kitty"
 
 myFocusFollowsMouse :: Bool
@@ -136,6 +142,7 @@ ezKeybindings = [
         ,  ("M-<Space>"  , sendMessage NextLayout)
         ,  ("M-<Return>" , zshPrompt def "/home/h/.local/bin/capture.zsh")
         ,  ("M--"        , sendMessage Shrink)
+        ,  ("M-b"        ,spawnBasedOnFocus)
         ,  ("M-="        , sendMessage Expand)
         ,  ("M-S-l"      , windows W.swapDown)
         ,  ("M-S-h"      , windows W.swapUp)

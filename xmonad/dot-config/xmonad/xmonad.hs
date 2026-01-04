@@ -70,6 +70,7 @@ import XMonad.Util.EZConfig (additionalKeysP, mkNamedKeymap)
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 --------
+import XMonad.Actions.Submap
 import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
@@ -111,13 +112,6 @@ myFocusedBorderColor = "#46d9ff"
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ 
      ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    , ((modm,xK_u), windows W.focusMaster  )
-    , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
-    -- , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
-    , ((modm , xK_q     ), spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
-
-            -- ,((modm, xK_a), bindByLayout [("Tabbed Simplest", spawn "kitty"), ("Tall", spawn "alacritty"), ("", spawn "xmessage hello")])
-
     ]
     ++
     [((m .|. modm, k), windows $ f i)
@@ -136,21 +130,25 @@ ezKeybindings = [
         ,  ("M-y"        , kill)
         ,  ("M-l"        , windows W.focusDown)
         ,  ("M-h"        , windows W.focusUp)
+        ,  ("M-S-q"      , io exitSuccess)
+        ,  ("M-q"        , spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")
         -- ,  ("M-j"        , windows W.focusDown)
         -- ,  ("M-k"        , windows W.focusUp)
         ,  ("M-."        , nextScreen)
         ,  ("M-<Space>"  , sendMessage NextLayout)
         ,  ("M-<Return>" , zshPrompt def "/home/h/.local/bin/capture.zsh")
         ,  ("M--"        , sendMessage Shrink)
-        ,  ("M-b"        ,spawnBasedOnFocus)
+        ,  ("M-b"        , spawnBasedOnFocus)
         ,  ("M-="        , sendMessage Expand)
         ,  ("M-S-l"      , windows W.swapDown)
         ,  ("M-S-h"      , windows W.swapUp)
         ,  ("M-t"        , withFocused $ windows . W.sink)
         ,  ("M-,"        , sendMessage (IncMasterN 1))
-        ,  ("M-<F2>"        , spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%")
-        ,  ("M-<F3>"        , spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%")
-        ,  ("M-j", bindByLayout [
+        ,  ("M-<F9>"     , spawn "bash -c '[[ $(setxkbmap -query | grep -P layout:.*ru ) ]] && setxkbmap us || setxkbmap ru'")
+        ,  ("M-<F2>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%")
+        ,  ("M-<F3>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%")
+        ,  ("M-u"        , windows W.focusMaster  )
+        ,  ("M-j"        , bindByLayout [
                ("Tabbed Simplest", windows W.focusUp)
             ,  ("", windows W.focusDown)
               ])
@@ -159,7 +157,14 @@ ezKeybindings = [
             ,  ("", windows W.focusUp)
               ])
 
-     ] 
+     ] ++ [
+
+    ("M-/", submap . M.fromList $
+       [
+        ((0, xK_u),     spawn "firefox")
+       ,((0, xK_p),     spawn "waterfox --private-window")
+       ])
+     ]
      -- ++ 
      --  [ ("M-d",spawn "alacritty")
      --        | c <- ["alacritty"] 

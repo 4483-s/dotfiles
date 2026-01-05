@@ -140,8 +140,8 @@ ezKeybindings = [
         ,  ("M--"        , sendMessage Shrink)
         ,  ("M-b"        , spawnBasedOnFocus)
         ,  ("M-="        , sendMessage Expand)
-        ,  ("M-S-l"      , windows W.swapDown)
-        ,  ("M-S-h"      , windows W.swapUp)
+        ,  ("M-S-j"      , windows W.swapDown)
+        ,  ("M-S-k"      , windows W.swapUp)
         ,  ("M-t"        , withFocused $ windows . W.sink)
         ,  ("M-,"        , sendMessage (IncMasterN 1))
         ,  ("M-<F9>"     , spawn "bash -c '[[ $(setxkbmap -query | grep -P layout:.*ru ) ]] && setxkbmap us || setxkbmap ru'")
@@ -179,14 +179,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), \w -> focus w >> mouseMoveWindow w
                                       >> windows W.shiftMaster)
-
     -- mod-button2, Raise the window to the top of the stack
     , ((modm, button2), \w -> focus w >> windows W.shiftMaster)
-
     -- mod-button3, Set the window to floating mode and resize by dragging
     , ((modm, button3), \w -> focus w >> mouseResizeWindow w
                                       >> windows W.shiftMaster)
-
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
@@ -210,11 +207,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 myTabConfig = def {
 -- myFont = "xft:SauceCodePro Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
 -- fontName = "xft:JetBrains Mono:regular:size=9:antialias=true:hinting=true",
-  fontName = "xft:Ubuntu Mono:bold:size=9",
+  fontName = "xft:Ubuntu Mono:bold:pixelsize=14",
   activeColor = "#04ddf9",
   activeTextColor = "#490b13",
   inactiveColor = "#333333",
-  decoHeight = 13,
+  decoHeight = 14,
   activeBorderWidth = 0,
   inactiveBorderWidth =0,
   urgentBorderWidth=0
@@ -232,35 +229,16 @@ myTabConfig = def {
 -- myLayout =avoidStruts ( smartBorders tiled ||| smartBorders (Mirror  tiled) ||| smartBorders Full ||| Grid|||spiral (6/7) )
 -- simpleTabbedRight, tabbedRight, addTabsRight
 myLayout =avoidStruts ( smartBorders tiled ||| smartBorders( noBorders(tabbed shrinkText myTabConfig))||| smartBorders Grid)
-
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
-
      -- The default number of windows in the master pane
      nmaster = 1
-
      -- Default proportion of screen occupied by master pane
      ratio   = 1/2
-
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
-------------------------------------------------------------------------
--- Window rules:
-
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "confirm"         --> doFloat
@@ -270,59 +248,24 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
-------------------------------------------------------------------------
--- Event handling
-
--- * EwmhDesktops users should change this to ewmhDesktopsEventHook
---
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
 -- myEventHook = mempty
 
 myEventHook= swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
 -- myEventHook = docksEventHook <+> handleEventHook def <+> fullscreenEventHook
-------------------------------------------------------------------------
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
 myLogHook = return ()
 
-------------------------------------------------------------------------
--- Startup hook
-
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
 myStartupHook = do 
   -- spawnOnce "feh --bg-fill ~/Pictures/backgrounds/0142.jpg &"
   spawnOnce "feh --randomize --bg-fill ~/Pictures/backgrounds/*"  -- feh set random wallpaper
   spawnOnce "xscreensaver --no-splash &"
   setWMName "LG3D"
 
-
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
-
--- Run xmonad with the settings you specify. No need to modify this.
---
 main = do 
     -- xmproc <- spawnPipe "xmobar -x 0 /home/h/.config/xmobar/myxmo"
     -- xmproc <- spawnPipe "polybar mainbar-xmonad"
     xmonad $ docks $ ewmh $ ewmhFullscreen $ defaults
     -- xmonad $ docks $ ewmh $ ewmhFullscreen $ my2D $ defaults
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
 defaults = def {
       -- simple stuff
         terminal           = myTerminal,

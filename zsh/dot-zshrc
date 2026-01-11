@@ -168,7 +168,7 @@ a(){
   # man $@ | bat -lman
   man $@ | bat --language=man
 }
-export MANPAGER='nvim +Man!'
+# export MANPAGER='nvim +Man!'
 # export AGNOSTER_DIR_BG=56
 # export AGNOSTER_DIR_FG=193
 eval "$(zoxide init zsh)"

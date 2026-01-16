@@ -121,7 +121,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ezKeybindings = [ 
 -- ("M-S-z", spawn "xscreensaver-command -lock")
 -- , ("M-C-s", unGrab *> spawn "scrot -s"        )
-           ("M-;"        , spawn myTerminal)
+           -- ("M-;"        , spawn myTerminal)
+           ("M-["        , spawn myTerminal)
+        ,  ("M-;"        , spawn "kitty -e bash")
         ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
         ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
         ,  ("M-i"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+w")
@@ -257,7 +259,6 @@ myLogHook = return ()
 myStartupHook = do 
   -- spawnOnce "feh --bg-fill ~/Pictures/backgrounds/0142.jpg &"
   spawnOnce "feh --randomize --bg-fill ~/Pictures/backgrounds/*"  -- feh set random wallpaper
-  spawnOnce "xscreensaver --no-splash &"
   setWMName "LG3D"
 
 main = do 

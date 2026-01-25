@@ -92,7 +92,8 @@ spawnBasedOnFocus = withFocused $ \w -> do
           | "Alacritty" `isInfixOf` c -> spawn "alacritty"
         _                             -> spawn "firefox"
 
-myTerminal      = "kitty"
+myTerminal      = "alacritty"
+-- myTerminal      = "kitty"
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -124,7 +125,7 @@ ezKeybindings = [
            -- ("M-;"        , spawn myTerminal)
            ("M-["        , spawn myTerminal)
         ,  ("M-u"        , spawn myTerminal)
-        ,  ("M-;"        , spawn "kitty -e bash")
+        ,  ("M-;"        , spawn "alacritty -e bash")
         ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
         ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
         ,  ("M-i"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+w")

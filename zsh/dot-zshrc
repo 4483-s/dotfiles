@@ -76,7 +76,8 @@ plugins=(git fzf archlinux)
 
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
-
+export TERM=xterm-256color
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -192,7 +193,6 @@ chpwd() { pwd >! ~/.last_dir }
 if [[ -f ~/.last_dir ]]; then
     cd "$(cat ~/.last_dir)" || cd ~
 fi
-alias poweroff="udiskie-umount -da && /bin/poweroff"
 a(){
   # man $@ | bat -lman
   man $@ | bat --language=man
@@ -204,3 +204,4 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 source ~/.scripts/g.sh
 [ -f "/home/h/.ghcup/env" ] && . "/home/h/.ghcup/env" # ghcup-env
+

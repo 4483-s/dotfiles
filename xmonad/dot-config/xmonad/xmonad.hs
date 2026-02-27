@@ -92,8 +92,8 @@ spawnBasedOnFocus = withFocused $ \w -> do
           | "Alacritty" `isInfixOf` c -> spawn "alacritty"
         _                             -> spawn "firefox"
 
-myTerminal      = "ghostty"
--- myTerminal      = "kitty"
+-- myTerminal      = "ghostty"
+myTerminal      = "kitty"
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
@@ -101,14 +101,16 @@ myFocusFollowsMouse = True
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
-myBorderWidth   = 1
+myBorderWidth   = 2
 myModMask       = mod4Mask
 
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
-myNormalBorderColor  = "#282a36"
+-- myNormalBorderColor  = "#282a36"
+myNormalBorderColor  = "#111111"
 -- myFocusedBorderColor = "#f34fff"
-myFocusedBorderColor = "#46d9ff"
+-- myFocusedBorderColor = "#46d9ff"
+myFocusedBorderColor = "#f402fc"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ 
@@ -125,7 +127,7 @@ ezKeybindings = [
            -- ("M-;"        , spawn myTerminal)
            ("M-["        , spawn myTerminal)
         ,  ("M-u"        , spawn myTerminal)
-        ,  ("M-;"        , spawn "ghostty -e bash")
+        ,  ("M-;"        , spawn (myTerminal++" -e bash"))
         ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
         ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
         ,  ("M-i"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+w")
@@ -147,7 +149,7 @@ ezKeybindings = [
         ,  ("M-S-j"      , windows W.swapDown)
         ,  ("M-S-k"      , windows W.swapUp)
         ,  ("M-t"        , withFocused $ windows . W.sink)
-        ,  ("M-,"        , sendMessage (IncMasterN 1))
+--        ,  ("M-,"        , sendMessage (IncMasterN 1))
         ,  ("M-<F9>"     , spawn "bash -c '[[ $(setxkbmap -query | grep -P layout:.*ru ) ]] && setxkbmap us || setxkbmap ru'")
         ,  ("M-<F2>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%")
         ,  ("M-<F3>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%")

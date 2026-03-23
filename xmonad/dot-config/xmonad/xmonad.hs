@@ -74,7 +74,7 @@ import XMonad.Actions.Submap
 import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
-import XMonad.Actions.CycleWS (nextScreen)
+import XMonad.Actions.CycleWS (nextScreen, prevScreen)
 import XMonad.Prompt.Zsh
 import XMonad.Layout.Tabbed
 import XMonad.Actions.Navigation2D
@@ -141,6 +141,7 @@ ezKeybindings = [
         -- ,  ("M-j"        , windows W.focusDown)
         -- ,  ("M-k"        , windows W.focusUp)
         ,  ("M-."        , nextScreen)
+        ,  ("M-,"        , prevScreen)
         ,  ("M-<Space>"  , sendMessage NextLayout)
         ,  ("M-<Return>" , zshPrompt def "/home/h/.local/bin/capture.zsh")
         ,  ("M--"        , sendMessage Shrink)

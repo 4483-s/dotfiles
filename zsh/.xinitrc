@@ -70,10 +70,8 @@ mytwm='xmonad'
 
 if [[ "$mytwm" == 'xmonad' ]]; then
   if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
-    echo from cache >>~/.xmonad.log
     exec $HOME/.cache/xmonad/xmonad-x86_64-linux
   else
-    echo from executable >>~/.xmonad.log
     exec "$mytwm"
   fi
 fi

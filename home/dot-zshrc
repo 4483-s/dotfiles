@@ -95,7 +95,6 @@ for i in ~/.shaddon.d/*;do
 done
 # source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 # export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
-# export PATH=~/.local/bin:~/.cargo/bin:${PATH}
 setopt hashexecutablesonly
 # Save current directory on exit
 chpwd() { pwd >! ~/.last_dir }

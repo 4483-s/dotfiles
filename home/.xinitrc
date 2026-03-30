@@ -48,7 +48,7 @@ fi
 
 if [[ "$(cat /etc/machine-id)" == 6f481e10d8a04e14aeae1d77bfd38de2 ]]; then
   xrandr --output HDMI-2 --primary
-  # xrandr --output HDMI-2 --primary --pos 0x0 --left-of HDMI-1
+  xrandr --output HDMI-2 --primary --pos 0x0 --left-of HDMI-1
 fi
 
 if type "xrandr"; then

@@ -255,9 +255,8 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
--- myEventHook = mempty
-
-myEventHook= swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
+myEventHook = mempty
+-- myEventHook= swallowEventHook (className =? "Alacritty" <||> className =? "kitty") (return True)
 -- myEventHook = docksEventHook <+> handleEventHook def <+> fullscreenEventHook
 myLogHook = return ()
 

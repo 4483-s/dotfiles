@@ -18,6 +18,11 @@ function cd() {
   fi
   builtin cd "${new_directory}" && ls -lhF --time-style=long-iso --color=auto
 }
+
+vssh() {
+  ssh ${1}@192.168.122.$2
+}
+
 # dj() {
 #   dirs -v
 #   read var

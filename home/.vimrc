@@ -2,7 +2,7 @@ set relativenumber number
 set hlsearch
 set incsearch
 set cursorline
-set cursorcolumn
+"set cursorcolumn
 
 syntax on
 imap jj <Esc>

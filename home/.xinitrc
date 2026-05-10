@@ -64,7 +64,7 @@ nm-applet &
 picom --daemon &
 redshift -O 4480
 
-mytwm='xmonad'
+mytwm="$(cat ~/.mytwm)"
 # mytwm='spectrwm'
 # mytwm='qtile start'
 

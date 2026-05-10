@@ -68,11 +68,10 @@ mytwm="$(cat ~/.mytwm)"
 # mytwm='spectrwm'
 # mytwm='qtile start'
 
+[[ -z $mytwm ]] && exec i3
 if [[ "$mytwm" == 'xmonad' ]]; then
   if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
     exec $HOME/.cache/xmonad/xmonad-x86_64-linux
-  else
-    exec "$mytwm"
   fi
 fi
 exec "$mytwm"

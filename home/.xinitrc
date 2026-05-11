@@ -47,6 +47,7 @@ if [ -d "$xinitdir"/xinitrc.d ]; then
 fi
 
 ########
+mytwm="$(cat ~/.mytwm)"
 randombg() {
   feh --randomize --bg-fill ~/Pictures/2wallpapers/*
 }
@@ -55,12 +56,17 @@ if [[ "$(cat /etc/machine-id)" == 6f481e10d8a04e14aeae1d77bfd38de2 ]]; then
   xrandr --output HDMI-2 --primary --pos 0x0 --left-of HDMI-1
 fi
 
-if type "xrandr"; then
-  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m polybar --reload base &
-  done
-else
-  polybar --reload base &
+spawnpolybar() {
+  if type "xrandr"; then
+    for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+      MONITOR=$m polybar --reload base &
+    done
+  else
+    polybar --reload base &
+  fi
+}
+if ! [[ "${mytwm##*/}" == dwm ]]; then
+  spawnpolybar
 fi
 
 # feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
@@ -68,7 +74,6 @@ nm-applet &
 picom --daemon &
 redshift -O 4480
 
-mytwm="$(cat ~/.mytwm)"
 # mytwm='spectrwm'
 # mytwm='qtile start'
 

@@ -262,7 +262,7 @@ myLogHook = return ()
 
 myStartupHook = do 
   -- spawnOnce "feh --bg-fill ~/Pictures/backgrounds/0142.jpg &"
-  spawnOnce "feh --randomize --bg-fill ~/Pictures/2wallpapers/*"  -- feh set random wallpaper
+--spawnOnce "feh --randomize --bg-fill ~/Pictures/2wallpapers/*"  -- feh set random wallpaper
   setWMName "LG3D"
 
 main = do 

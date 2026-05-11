@@ -46,6 +46,10 @@ if [ -d "$xinitdir"/xinitrc.d ]; then
   unset f
 fi
 
+########
+randombg() {
+  feh --randomize --bg-fill ~/Pictures/2wallpapers/*
+}
 if [[ "$(cat /etc/machine-id)" == 6f481e10d8a04e14aeae1d77bfd38de2 ]]; then
   xrandr --output HDMI-2 --primary
   xrandr --output HDMI-2 --primary --pos 0x0 --left-of HDMI-1
@@ -68,6 +72,7 @@ mytwm="$(cat ~/.mytwm)"
 # mytwm='spectrwm'
 # mytwm='qtile start'
 
+randombg
 [[ -z $mytwm ]] && exec i3
 if [[ "$mytwm" == 'xmonad' ]]; then
   if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then

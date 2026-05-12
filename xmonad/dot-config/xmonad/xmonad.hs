@@ -132,7 +132,7 @@ ezKeybindings = [
         ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
 --      ,  ("M-i"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+w")
         ,  ("M-o"        , spawn "waterfox")
-        ,  ("M-p"        , spawn "rofi -show drun")
+        ,  ("M-p"        , spawn "rofi -show drun -m -1")
         ,  ("M-y"        , kill)
         ,  ("M-l"        , windows W.focusDown)
         ,  ("M-h"        , windows W.focusUp)
@@ -168,7 +168,7 @@ ezKeybindings = [
 
     ("M-i", submap . M.fromList $
        [
-        ((0, xK_i),     spawn "dmtype")
+        ((0, xK_i),     spawn "dmtype.sh")
        ,((0, xK_p),     spawn "waterfox --private-window")
        ])
      ]

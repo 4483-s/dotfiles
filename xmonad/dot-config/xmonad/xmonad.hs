@@ -126,8 +126,7 @@ ezKeybindings = [
 -- , ("M-C-s", unGrab *> spawn "scrot -s"        )
            -- ("M-;"        , spawn myTerminal)
            ("M-["        , spawn myTerminal)
-        ,  ("M-;"        , spawn (myTerminal ++ " -e bash"))
-        ,  ("M-u"        , spawn myTerminal)
+        ,  ("M-;"        , spawn myTerminal)
         ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
         ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
 --      ,  ("M-i"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+w")
@@ -165,11 +164,32 @@ ezKeybindings = [
               ])
 
      ] ++ [
-
     ("M-i", submap . M.fromList $
        [
-        ((0, xK_i),     spawn "dmtype.sh")
-       ,((0, xK_p),     spawn "waterfox --private-window")
+        ((0, xK_i),     spawn "dmtype.sh"),
+        ((0, xK_l),     spawn "launch.sh"),
+        ((0, xK_j),     spawn (myTerminal ++ " -e fish")),
+        ((0, xK_k),     spawn (myTerminal ++ " -e bash")),
+        ((0, xK_p),     spawn "waterfox --private-window")
+       ])
+     ] ++ [
+    ("M-u", submap . M.fromList $
+       [
+        ((0, xK_y),         spawn "wmscript-y.sh"),
+        ((0, xK_u),         spawn "wmscript-u.sh"),
+        ((0, xK_i),         spawn "wmscript-i.sh"),
+        ((0, xK_o),         spawn "wmscript-o.sh"),
+        ((0, xK_p),         spawn "wmscript-p.sh"),
+        ((0, xK_h),         spawn "wmscript-h.sh"),
+        ((0, xK_j),         spawn "wmscript-j.sh"),
+        ((0, xK_k),         spawn "wmscript-k.sh"),
+        ((0, xK_l),         spawn "wmscript-l.sh"),
+        ((0, xK_semicolon), spawn "wmscript-semicolon.sh"),
+        ((0, xK_n),         spawn "wmscript-n.sh"),
+        ((0, xK_m),         spawn "wmscript-m.sh"),
+        ((0, xK_comma),     spawn "wmscript-comma.sh"),
+        ((0, xK_period),    spawn "wmscript-peroid.sh"),
+        ((0, xK_slash),     spawn "kitty")
        ])
      ]
      -- ++ 
@@ -235,7 +255,7 @@ myTabConfig = def {
 
 -- myLayout =avoidStruts ( smartBorders tiled ||| smartBorders (Mirror  tiled) ||| smartBorders Full ||| Grid|||spiral (6/7) )
 -- simpleTabbedRight, tabbedRight, addTabsRight
-myLayout =avoidStruts ( smartBorders tiled ||| smartBorders( noBorders(tabbed shrinkText myTabConfig))||| smartBorders Grid)
+myLayout =avoidStruts ( smartBorders tiled ||| smartBorders( noBorders(tabbed shrinkText myTabConfig)))
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio

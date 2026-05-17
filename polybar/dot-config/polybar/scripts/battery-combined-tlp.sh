@@ -4,4 +4,4 @@ if [ ! "$(type tlp-stat 2>/dev/null)" ]; then
 fi
 battery=$(sudo tlp-stat -b | tac | grep -m 1 "Charge" | tr -d -c "[:digit:],.")
 
-echo "# $battery %"
+echo "BAT $battery %"

@@ -103,7 +103,7 @@ if [[ -f ~/.last_dir ]]; then
     cd "$(cat ~/.last_dir)" || cd ~
 fi
 a(){
-  man "$@" | bat --language=man
+  cd ~/storage
 }
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"

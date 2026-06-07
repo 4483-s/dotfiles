@@ -108,4 +108,3 @@ a(){
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 source ~/.scripts/g.sh
-[ -f "/home/h/.ghcup/env" ] && . "/home/h/.ghcup/env" # ghcup-env

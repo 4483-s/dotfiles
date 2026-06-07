@@ -6,7 +6,7 @@ j() {
   /bin/rm -f -- "$tmp"
 }
 rm() {
-  for i in ${@}; do
+  for i in "${@}"; do
     trash-put "${i}"
   done
   unset i

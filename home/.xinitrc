@@ -79,7 +79,7 @@ redshift -O 4480
 
 randombg
 [[ -z $mytwm ]] && exec i3
-if [[ "$mytwm" == 'xmonad' ]]; then
+if [[ $mytwm == *xmonad ]]; then
   if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
     exec $HOME/.cache/xmonad/xmonad-x86_64-linux
   fi

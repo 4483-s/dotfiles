@@ -127,6 +127,7 @@ ezKeybindings = [
            -- ("M-;"        , spawn myTerminal)
            ("M-["        , spawn myTerminal)
         ,  ("M-;"        , spawn myTerminal)
+        ,  ("M-/"        , spawn "dmtype.sh")
         ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
         ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
 --      ,  ("M-i"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+w")

@@ -21,3 +21,4 @@ nnoremap k gk
 
 let mapleader = " "
 nnoremap <leader>h :noh<CR>
+autocmd FileType yaml setlocal et ai ts=2 sw=2

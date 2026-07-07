@@ -19,4 +19,3 @@ user_pref("browser.search.separatePrivateDefault", false);
 user_pref("browser.tabs.warnOnClose", false);
 
 
-

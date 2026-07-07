@@ -18,4 +18,7 @@ user_pref("browser.translations.automaticallyPopup", false);
 user_pref("browser.search.separatePrivateDefault", false);
 user_pref("browser.tabs.warnOnClose", false);
 
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+
 

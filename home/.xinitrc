@@ -71,7 +71,7 @@ fi
 
 # feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
 nm-applet &
-#picom --daemon &
+picom --daemon &
 redshift -O 4480
 
 # mytwm='spectrwm'

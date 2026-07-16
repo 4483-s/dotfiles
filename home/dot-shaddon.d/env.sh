@@ -9,6 +9,6 @@ _pathhelper "${HOME}/.local/bin"
 _pathhelper "${HOME}/bin"
 unset -f _pathhelper
 # [[ :$PATH: == *:${HOME}/.local/bin:* ]] || export PATH=${HOME}/.local/bin:${PATH}
-# export MANPAGER='nvim +Man!'
+export MANPAGER='nvim +Man!'
 # export AGNOSTER_DIR_BG=56
 # export AGNOSTER_DIR_FG=193

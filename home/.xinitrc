@@ -47,7 +47,8 @@ if [ -d "$xinitdir"/xinitrc.d ]; then
 fi
 
 ########
-mytwm="$(cat ~/.mytwm)"
+# mytwm="$(cat ~/.mytwm)"
+mytwm="$(grep -v ^# ~/.mytwm)"
 randombg() {
   feh --randomize --bg-fill /opt/wallpapers/*
 }

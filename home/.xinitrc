@@ -49,7 +49,7 @@ fi
 ########
 mytwm="$(cat ~/.mytwm)"
 randombg() {
-  feh --randomize --bg-fill ~/Pictures/2wallpapers/*
+  feh --randomize --bg-fill /opt/wallpapers/*
 }
 if [[ "$(cat /etc/machine-id)" == 6f481e10d8a04e14aeae1d77bfd38de2 ]]; then
   xrandr --output HDMI-2 --primary
@@ -69,16 +69,11 @@ if ! [[ "${mytwm##*/}" == dwm ]]; then
   spawnpolybar
 fi
 
-# feh --bg-fill /home/h/.config/sway/img/gnufsf.jpg &
 nm-applet &
 picom --daemon &
-redshift -O 4480
-
-# mytwm='spectrwm'
-# mytwm='qtile start'
-
+redshift -O 4420
 randombg
-[[ -z $mytwm ]] && exec i3
+[[ -z $mytwm ]] && exec dwm
 if [[ $mytwm == *xmonad ]]; then
   if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
     exec $HOME/.cache/xmonad/xmonad-x86_64-linux

@@ -1,5 +1,2 @@
-#export PATH="$HOME/.local/bin:${HOME}/.cargo/bin:$PATH"
-
-# [ -f "/home/h/.ghcup/env" ] && . "/home/h/.ghcup/env" # ghcup-env
 [ -e "$HOME/.zshrc" ] && . "$HOME/.zshrc"
 

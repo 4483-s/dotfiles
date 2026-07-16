@@ -11,44 +11,17 @@ rm() {
   done
   unset i
 }
-function cd() {
-  new_directory="$*"
-  if [ $# -eq 0 ]; then
-    new_directory=${HOME}
-  fi
-  builtin cd "${new_directory}" && ls -lhF --time-style=long-iso --color=auto
-}
+# function cd() {
+#   new_directory="$*"
+#   if [ $# -eq 0 ]; then
+#     new_directory=${HOME}
+#   fi
+#   builtin cd "${new_directory}" && ls -lhF --time-style=long-iso --color=auto
+# }
 
 vssh() {
   ssh ${1}@192.168.122.$2
 }
-
-# dj() {
-#   dirs -v
-#   read var
-#   if [[ -n $var ]]; then
-#     pushd -$var
-#   fi
-#   unset var
-# }
-
-# m(){
-#   if [[ $1 == '-h' ]];then
-#     echo "e.g.        m script.sh bash"
-#     return 0
-#   fi
-#   if [[ -f "${1}"  ]];then
-#     echo file exists
-#     return 1
-#     else
-#     echo "#!/usr/bin/env ${2}" > "${1}"
-#     chmod u+x ${1}
-#       if [[ $3 == 'v' ]];then
-#
-#       v "$1"
-#       fi
-#   fi
-# }
 
 function extract() {
   if [ -f $1 ]; then

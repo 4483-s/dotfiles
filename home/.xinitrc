@@ -66,7 +66,7 @@ spawnpolybar() {
     polybar --reload base &
   fi
 }
-if ! [[ "${mytwm##*/}" == dwm ]]; then
+if ! [[ "${mytwm##*/}" == dwm || "${mytwm##*/}" == i3 || "${mytwm##*/}" == *qtile* ]]; then
   spawnpolybar
 fi
 

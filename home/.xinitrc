@@ -66,15 +66,16 @@ spawnpolybar() {
     polybar --reload base &
   fi
 }
-if ! [[ "${mytwm##*/}" == dwm || "${mytwm##*/}" == i3 || "${mytwm##*/}" == *qtile* ]]; then
-  spawnpolybar
-fi
+# if [[ "${mytwm##*/}" == dwm || "${mytwm##*/}" == i3 || "${mytwm##*/}" == *qtile* ]]; then
+#   spawnpolybar
+# fi
+[[ "${mytwm##*/}" == xmonad ]] && spawnpolybar
 
 nm-applet &
 picom --daemon &
 redshift -O 4420
 randombg
-[[ -z $mytwm ]] && exec dwm
+[[ -z $mytwm ]] && exit 1
 if [[ $mytwm == *xmonad ]]; then
   if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
     exec $HOME/.cache/xmonad/xmonad-x86_64-linux

@@ -39,6 +39,8 @@ local colors = {
     grey = "#bbbbbb",
     blue = "#6dade3",
     purple = "#ad8ee6",
+    bred = "#ff0000",
+    black= "#000000"
 }
 
 -- Workspace tags - can be numbers, names, or icons (requires a Nerd Font)
@@ -135,11 +137,11 @@ oxwm.set_layout_symbol("tabbed", "[=]")
 -- Border configuration
 
 -- Width in pixels
-oxwm.border.set_width(2)
+oxwm.border.set_width(4)
 -- Color of focused window border
-oxwm.border.set_focused_color(colors.blue)
+oxwm.border.set_focused_color(colors.bred)
 -- Color of unfocused window borders
-oxwm.border.set_unfocused_color(colors.grey)
+oxwm.border.set_unfocused_color(colors.black)
 
 -- Where floating windows spawn: "top-left", "top-center", "top-right",
 -- "center-left", "center", "center-right", "bottom-left", "bottom-center", "bottom-right"
@@ -148,9 +150,10 @@ oxwm.set_floating_position("center")
 -- Smart Enabled = No border if 1 window
 oxwm.gaps.set_smart(true)
 -- Inner gaps (horizontal, vertical) in pixels
-oxwm.gaps.set_inner(5, 5)
+oxwm.gaps.set_inner(5,5)
 -- Outer gaps (horizontal, vertical) in pixels
-oxwm.gaps.set_outer(5, 5)
+oxwm.gaps.set_outer(5,5)
+oxwm.gaps.disable()
 
 -------------------------------------------------------------------------------
 -- Window Rules
@@ -220,7 +223,7 @@ oxwm.key.bind({ modkey }, "D", oxwm.spawn({ "sh", "-c", "dmenu_run -l 10" }))
 -- Copy screenshot to clipboard
 oxwm.key.bind({ modkey }, "Q", oxwm.spawn({"sh","-c","xdotool keydown Control_L key Tab"}))
 oxwm.key.bind({ modkey }, "N", oxwm.spawn({"xdo1.sh"}))
-oxwm.key.bind({ modkey }, "M", oxwm.spawn({"xdo1.sh","0"}))
+oxwm.key.bind({ modkey }, "M", oxwm.spawn({"xdo1.sh 0"}))
 oxwm.key.bind({ modkey }, "Y", oxwm.client.kill())
 
 -- Keybind overlay - Shows important keybindings on screen
@@ -355,7 +358,7 @@ oxwm.key.chord({
 -- Commands to run once when OXWM starts
 -- Uncomment and modify these examples, or add your own
 
--- oxwm.autostart("picom")
+oxwm.autostart("picom")
 -- oxwm.autostart("feh --bg-scale ~/wallpaper.jpg")
 -- oxwm.autostart("dunst")
 -- oxwm.autostart("nm-applet")

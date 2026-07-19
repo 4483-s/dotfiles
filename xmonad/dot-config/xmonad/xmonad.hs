@@ -24,13 +24,6 @@ import Data.List (isInfixOf)
 import XMonad.Hooks.FloatNext
 -- import XMonad.Hooks.ManageHelpers
 
-spawnBasedOnFocus :: X ()
-spawnBasedOnFocus = withFocused $ \w -> do
-    cls <- runQuery className w
-    case cls of
-        c | "kitty"     `isInfixOf` c -> spawn "kitty"
-          | "Alacritty" `isInfixOf` c -> spawn "alacritty"
-        _                             -> spawn "firefox"
 
 myTerminal      = "kitty"
 
@@ -63,7 +56,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ezKeybindings = [ 
 -- , ("M-C-s", unGrab *> spawn "scrot -s"        )
            ("M-a"        , spawn       "wmscript-a"  ) -- test
-        ,  ("M-["        , spawn myTerminal)
         ,  ("M-;"        , spawn myTerminal)
         ,  ("M-/"        , spawn "dmtype.sh")
         -- ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
@@ -78,15 +70,17 @@ ezKeybindings = [
         ,  ("M-."        , nextScreen)
         ,  ("M-,"        , prevScreen)
         ,  ("M-<Space>"  , sendMessage NextLayout)
-        ,  ("M-<Return>" , zshPrompt def "/home/h/.local/bin/capture.zsh")
+        ,  ("M-<Return>" , zshPrompt def "capture.zsh")
         ,  ("M-h"        , sendMessage Shrink)
         ,  ("M-l"        , sendMessage Expand)
-        ,  ("M-b"        , spawnBasedOnFocus)
         ,  ("M-S-j"      , windows W.swapDown)
         ,  ("M-S-k"      , windows W.swapUp)
         ,  ("M-t"        , withFocused $ windows . W.sink)
 --        ,  ("M-,"        , sendMessage (IncMasterN 1))
         ,  ("M-e"        , windows W.swapMaster)
+        ,  ("M-i i"        , spawn (myTerminal ++ " -e fish"))
+        ,  ("M-i u"        , spawn (myTerminal ++ " -e bash"))
+        ,  ("M-i p"        , spawn "waterfox --private-window")
         ,  ("M-<F9>"     , spawn "bash -c '[[ $(setxkbmap -query | grep -P layout:.*ru ) ]] && setxkbmap us || setxkbmap ru'")
         ,  ("M-<F2>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%")
         ,  ("M-<F3>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%")
@@ -101,15 +95,6 @@ ezKeybindings = [
             ,  ("", windows W.focusUp)
               ])
 
-     ] ++ [
-    ("M-i", submap . M.fromList $
-       [
-        ((0, xK_i),     spawn "dmtype.sh"),
-        ((0, xK_l),     spawn "launch.sh"),
-        ((0, xK_j),     spawn (myTerminal ++ " -e fish")),
-        ((0, xK_k),     spawn (myTerminal ++ " -e bash")),
-        ((0, xK_p),     spawn "waterfox --private-window")
-       ])
      ] ++ [
     ("M-u", submap . M.fromList $
        [

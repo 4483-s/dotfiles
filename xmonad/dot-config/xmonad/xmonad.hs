@@ -21,6 +21,8 @@ import XMonad.Hooks.WindowSwallowing
 import XMonad.Actions.PerLayoutKeys
 import XMonad.Actions.WindowGo (runOrRaise, ifWindow)
 import Data.List (isInfixOf)
+import XMonad.Hooks.FloatNext
+-- import XMonad.Hooks.ManageHelpers
 
 spawnBasedOnFocus :: X ()
 spawnBasedOnFocus = withFocused $ \w -> do
@@ -89,6 +91,7 @@ ezKeybindings = [
         ,  ("M-<F2>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%")
         ,  ("M-<F3>"     , spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%")
         ,  ("M-w"        , windows W.focusMaster  )
+        ,  ("M-d"        , (do toggleFloatNext;spawn myTerminal )  )
         ,  ("M-j"        , bindByLayout [
                ("Tabbed Simplest", windows W.focusUp)
             ,  ("", windows W.focusDown)
@@ -215,6 +218,7 @@ myManageHook = composeAll
     , className =? "file_progress"   --> doFloat
     , className =? "dialog"          --> doFloat
     , className =? "Gimp"           --> doFloat
+    -- , className =? "Alacritty"           --> doCenterFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
@@ -250,7 +254,7 @@ defaults = def {
 
       -- hooks, layouts
         layoutHook         = myLayout,
-        manageHook         = myManageHook,
+        manageHook         = floatNextHook <> myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
         startupHook        = myStartupHook

@@ -2,7 +2,7 @@
 x-scheme-handler/http=waterfox.desktop;firefox.desktop;
 x-scheme-handler/https=waterfox.desktop;firefox.desktop;
 text/html=waterfox.desktop;firefox.desktop
-application/pdf=waterfox.desktop;firefox.desktop
+application/pdf=org.pwmt.zathura.desktop;waterfox.desktop;firefox.desktop
 application/x-extension-htm=waterfox.desktop;firefox.desktop
 application/x-extension-html=waterfox.desktop;firefox.desktop
 application/x-extension-shtml=waterfox.desktop;firefox.desktop

@@ -1,4 +1,5 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
+-- vim.cmd("source ~/.vimrc")
 require("config.lazy")
 vim.keymap.set("n", "<leader>o", function()
   vim.b.autoformat = false
@@ -6,4 +7,5 @@ vim.keymap.set("n", "<leader>o", function()
   vim.b.autoformat = true
 end)
 vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true })
+vim.opt.cursorcolumn = true
 -- vim.keymap.set("i", "x", "w")

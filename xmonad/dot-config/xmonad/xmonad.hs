@@ -63,7 +63,7 @@ ezKeybindings = [
         ,  ("M-m"        , unGrab >> spawn "xdo1.sh 0")
         ,  ("M-n"        , unGrab >> spawn "xdo1.sh 1")
         ,  ("M-o"        , spawn "waterfox")
-        ,  ("M-p"        , spawn "rofi -show drun -m -1")
+        ,  ("M-p"        , spawn "rofi -modes combi -combi-modes 'window,drun,run' -show combi -m -1")
         ,  ("M-y"        , kill)
         ,  ("M-S-q"      , io exitSuccess)
         ,  ("M-q"        , spawn "xmonad --recompile && xmonad --restart && echo 8 > ~/.xmonadcmp.log")

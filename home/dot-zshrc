@@ -88,6 +88,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 for i in ~/.shaddon.d/*;do 
   . "$i"
 done
+unset i
 # source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|z|z -|z ..|vim|v|j|reboot)"
 setopt hashexecutablesonly

@@ -57,7 +57,7 @@ ezKeybindings = [
 -- , ("M-C-s", unGrab *> spawn "scrot -s"        )
            ("M-a"        , spawn       "wmscript-a"  ) -- test
         ,  ("M-;"        , spawn myTerminal)
-        ,  ("M-/"        , spawn "mscript b")
+        ,  ("M-/"        , spawn "ms b")
         -- ,  ("M-m"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+Tab")
         -- ,  ("M-n"        , unGrab >> spawn "xdotool key --clearmodifiers ctrl+shift+Tab")
         ,  ("M-m"        , unGrab >> spawn "xdo1.sh 0")

@@ -77,6 +77,7 @@ redshift -O 4420
 randombg
 [[ -z $mytwm ]] && exit 1
 if [[ $mytwm == *xmonad ]]; then
+  xss-lock -s $XDG_SESSION_ID -- i3lock -n &
   if [ -e $HOME/.cache/xmonad/xmonad-x86_64-linux ]; then
     exec $HOME/.cache/xmonad/xmonad-x86_64-linux
   fi

@@ -18,9 +18,8 @@ user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("datareporting.usage.uploadEnabled", false);
 
-
-
 user_pref("browser.newtabpage.activity-stream.showSponsored", false); // [FF58+] Sponsored stories
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false); // [FF83+] Sponsored shortcuts
 user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false); // [FF140+] Support Firefox
 user_pref("extensions.getAddons.showPane", false); // [HIDDEN PREF]
+user_pref("browser.vpn_promo.enabled", false);

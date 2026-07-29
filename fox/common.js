@@ -17,3 +17,6 @@ user_pref("layout.css.prefers-color-scheme.content-override", 0); // dark color 
 user_pref("privacy.globalprivacycontrol.enabled", true);
 user_pref("signon.rememberSignons", false);
 user_pref("browser.cache.memory.capacity", -1);
+user_pref("general.platform.override", "Win32");
+user_pref("privacy.resistFingerprinting", true);
+

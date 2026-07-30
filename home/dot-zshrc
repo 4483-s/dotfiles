@@ -84,7 +84,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 # export ARCHFLAGS="-arch $(uname -m)"
 . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-. /usr/share/nvm/init-nvm.sh
 for i in ~/.shaddon.d/*;do 
   . "$i"
 done

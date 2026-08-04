@@ -11,7 +11,9 @@ alias grep='grep --color=auto'
 
 #PS1="[ \[\033[32;1m\]\u@\h:\w\[\033[0m\] ]\[\033[36m\] $ \[\033[0m\]" # colored prompt
 #PS1="\[\033[32;1m\]\u@\h:\w\[\033[0m\] \[\033[36m\]$ \[\033[0m\]" # colored prompt without brackets
-PS1='\[\033[32;1m\]\u@\h:\w\[\033[0m\] $? \[\033[36m\]$ \[\033[0m\]' # play
+PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'
+PS1='\[\033[32;1m\]\u@\h:\w\[\033[0m\] ${PS1_CMD1} $? \[\033[36m\]$ \[\033[0m\]' # play
+# PS1='\u@\h ${PS1_CMD1} $? \\$'
 export HISTTIMEFORMAT='%Y-%m-%d %H:%m:%d	'
 shopt -s globstar
 for i in ~/.shaddon.d/*; do

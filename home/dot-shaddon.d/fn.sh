@@ -7,7 +7,7 @@ j() {
 }
 f() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-  EDITOR=waterfox yazi "$@" --cwd-file="$tmp"
+  EDITOR=fxdisown yazi "$@" --cwd-file="$tmp"
   IFS= read -r -d '' cwd <"$tmp"
   [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
   /bin/rm -f -- "$tmp"

@@ -101,38 +101,6 @@ ezKeybindings = [
             ,  ("", windows W.focusUp)
               ])
 
-     ] ++ [
-    ("M-u", submap . M.fromList $
-       [
-        ((0, xK_1),         spawn "wmscript-u-1"),
-        ((0, xK_2),         spawn "wmscript-u-2"),
-        ((0, xK_3),         spawn "wmscript-u-3"),
-        ((0, xK_4),         spawn "wmscript-u-4"),
-        ((0, xK_5),         spawn "wmscript-u-5"),
-        ((0, xK_6),         spawn "wmscript-u-6"),
-        ((0, xK_7),         spawn "wmscript-u-7"),
-        ((0, xK_8),         spawn "wmscript-u-8"),
-        ((0, xK_9),         spawn "wmscript-u-9"),
-        ((0, xK_0),         spawn "wmscript-u-0"),
-
-        ((0, xK_y),         spawn "wmscript-u-y"),
-        ((0, xK_u),         spawn "wmscript-u-u"),
-        ((0, xK_i),         spawn "wmscript-u-i"),
-        ((0, xK_o),         spawn "wmscript-u-o"),
-        ((0, xK_p),         spawn "wmscript-u-p"),
-        ((0, xK_h),         spawn "wmscript-u-h"),
-        ((0, xK_j),         spawn "wmscript-u-j"),
-        ((0, xK_k),         spawn "wmscript-u-k"),
-        ((0, xK_l),         spawn "wmscript-u-l"),
-        ((0, xK_n),         spawn "wmscript-u-n"),
-        ((0, xK_m),         spawn "wmscript-u-m"),
-        ((0, xK_q),         spawn "wmscript-u-q"), -- test
-        ((0, xK_semicolon), spawn "wmscript-u-semicolon"),
-        ((0, xK_comma),     spawn "wmscript-u-comma"),
-        ((0, xK_period),    spawn "wmscript-u-peroid"),
-        ((0, xK_slash),     spawn "wmscript-u-slash"),
-        ((0, xK_Return),    spawn "wmscript-u-Return")
-       ])
      ]
      -- ++ 
      --  [ ("M-d",spawn "alacritty")

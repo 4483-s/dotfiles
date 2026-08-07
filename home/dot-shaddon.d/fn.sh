@@ -5,6 +5,13 @@ j() {
   [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
   /bin/rm -f -- "$tmp"
 }
+f() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  EDITOR=waterfox yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd <"$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  /bin/rm -f -- "$tmp"
+}
 rm() {
   for i in "${@}"; do
     trash-put "${i}"
@@ -44,4 +51,7 @@ function extract() {
   else
     echo "'$1' is not a valid file"
   fi
+}
+function pacl() {
+  pacman -Ql "$@" | grep -v '/$'
 }

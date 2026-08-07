@@ -1,7 +1,7 @@
 [Default Applications]
 x-scheme-handler/http=waterfox.desktop;firefox.desktop;
 x-scheme-handler/https=waterfox.desktop;firefox.desktop;
-text/html=waterfox.desktop;firefox.desktop
+text/html=waterfox.desktop
 application/pdf=org.pwmt.zathura.desktop;waterfox.desktop;firefox.desktop
 application/x-extension-htm=waterfox.desktop;firefox.desktop
 application/x-extension-html=waterfox.desktop;firefox.desktop
@@ -13,6 +13,22 @@ application/epub+zip=org.pwmt.zathura.desktop;
 image/png=feh.desktop
 image/jpeg=feh.desktop
 video/webm=mpv.desktop
+
+text/english=nvim.desktop
+text/plain=nvim.desktop
+text/x-makefile=nvim.desktop
+text/x-c++hdr=nvim.desktop
+text/x-c++src=nvim.desktop
+text/x-chdr=nvim.desktop
+text/x-csrc=nvim.desktop
+text/x-java=nvim.desktop
+text/x-moc=nvim.desktop
+text/x-pascal=nvim.desktop
+text/x-tcl=nvim.desktop
+text/x-tex=nvim.desktop
+application/x-shellscri=nvim.desktoppt
+text/x-c=nvim.desktop
+text/x-c++=nvim.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;

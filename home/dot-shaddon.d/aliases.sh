@@ -1,6 +1,7 @@
+alias les='less -i'
 alias rp="grep -P"
-alias v="nvim"
-alias fx="waterfox"
+alias v='nvim'
+alias fx='waterfox'
 alias pshdt="bash ~/.config/scripts/pushconfig.sh"
 alias plldt="bash ~/.config/scripts/getconfig.sh"
 alias nrd='npm run dev'

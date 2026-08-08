@@ -8,4 +8,7 @@ vim.keymap.set("n", "<leader>o", function()
 end)
 vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true })
 vim.opt.cursorcolumn = true
+vim.keymap.set("n", "<leader>r", function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":vnew|r!", true, false, true), "n", false)
+end)
 -- vim.keymap.set("i", "x", "w")

@@ -26,8 +26,17 @@ rm() {
 #   builtin cd "${new_directory}" && ls -lhF --time-style=long-iso --color=auto
 # }
 
-vssh() {
-  ssh ${1}@192.168.122.$2
+# vssh() {
+#   local s
+#   [[ $# -ge 2 ]] && s="$1@192.168.122.$2" || s="192.168.122.$1"
+#   ssh-copy-id "$s"
+#   ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$s"
+# }
+vs() {
+  local base='192.168.122.' f
+  [[ $# -ge 2 ]] && f="$1@$base$2" || f="root@$base$1"
+  ssh-copy-id -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$f" 2>/dev/null
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$f" 2>/dev/null
 }
 
 function extract() {

@@ -22,3 +22,8 @@ alias vir="virsh -c qemu:///system"
 alias se="set -o emacs"
 alias sv="set -o vi"
 alias ma="MANPAGER=less man"
+
+alias ap='ansible-playbook'
+alias ad='ansible-doc'
+
+q=192.168.122.
